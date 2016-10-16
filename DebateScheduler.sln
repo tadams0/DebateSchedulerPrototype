@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebateScheduler", "DebateScheduler\DebateScheduler.csproj", "{7E27EB20-73E1-4E51-A143-DC17AD78672D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebateScheduler.Tests", "DebateScheduler.Tests\DebateScheduler.Tests.csproj", "{64E886DB-B430-473B-93F9-599ECBFF5D7D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E27EB20-73E1-4E51-A143-DC17AD78672D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E27EB20-73E1-4E51-A143-DC17AD78672D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E27EB20-73E1-4E51-A143-DC17AD78672D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E27EB20-73E1-4E51-A143-DC17AD78672D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64E886DB-B430-473B-93F9-599ECBFF5D7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64E886DB-B430-473B-93F9-599ECBFF5D7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64E886DB-B430-473B-93F9-599ECBFF5D7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64E886DB-B430-473B-93F9-599ECBFF5D7D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

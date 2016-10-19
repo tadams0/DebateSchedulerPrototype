@@ -4,16 +4,21 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link rel ="stylesheet" href ="MainStyle.css" type ="text/css" /> <!--This is the stylesheet which is inherited by all pages.-->
     <title>Debate Scheduler</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <link rel ="stylesheet" href ="MainStyle.css" type ="text/css" />
+    
+    <form id="form1" runat="server">
     <header>
         Where's the Right Click?
-    </header>
-    <form id="form1" runat="server">
+        <div id ="Login">
+            <asp:Login ID="Login1" runat="server" Height="41px" Width="269px" BorderStyle="None" TitleText="">
+            </asp:Login>
+        </div>
+    &nbsp;</header>
     <div>
         <asp:ContentPlaceHolder ID="mainContent" runat="server">
             
@@ -24,7 +29,7 @@
 
     <footer>
         Web services and application created by Team Where's The Right Click.
-    </footer>
+        </footer>
 </body>
     
 </html>

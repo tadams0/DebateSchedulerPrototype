@@ -12,6 +12,13 @@
 {
     float:right;
     font-size:12pt;
+    height: 114px;
+    width: 279px;
+}
+
+#Logout
+{
+    float:right;
 }
 
 body 

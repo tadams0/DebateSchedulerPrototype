@@ -55,15 +55,23 @@ namespace DebateScheduler
         /// </summary>
         /// <param name="username">The username, case sensitivity does not matter.</param>
         /// <param name="password">The password, case sensitive.</param>
-        public static void AuthenticateUsernamePassword(string username, string password) //TODO: Send a session or something back.. I don't know, send data back adequete enough to do login.
+        /// <returns>Returns null if the authentication failed. Returns a user object if the authentication suceeded.</returns>
+        public static User AuthenticateUsernamePassword(string username, string password) //TODO: Send a session or something back.. I don't know, send data back adequete enough to do login.
         {
+            User resultingUser = null;
+            string originalUserName = username; //The only reasion I assign this here, is because I was too lazy to replace username usage below... oh well!
             username = username.ToUpperInvariant(); //The username is converted to the upper invariant (upper case) to prevent case sensitivity on usernames.
 
             SqlConnection connection = new SqlConnection(GetConnectionStringUsersTable());
 
             try
             {
-                using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Users WHERE Name LIKE '%" + username + "%'", connection))
+                //using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Users WHERE Name LIKE '%" + username + "%'", connection))
+                SqlCommand command = new SqlCommand("SELECT * FROM Users WHERE Name = @UserName", connection);
+                SqlParameter parameter = command.Parameters.Add("@UserName", SqlDbType.NChar, 50);
+                parameter.Value = username;
+
+                using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                 {
                     DataTable resultingTable = new DataTable();
                     adapter.Fill(resultingTable);
@@ -78,6 +86,7 @@ namespace DebateScheduler
                         if (matchedName == username && password == matchedPassword) //Compares the username and password to the username and password found in the database.
                         {
                             //Log the user in, as the username and password match.
+                            resultingUser = new User(matchedPermissions, originalUserName);
                         }
                         else
                         {
@@ -103,6 +112,8 @@ namespace DebateScheduler
             {
                 connection.Close(); //The connection is guranteed a close within the finally code block.
             }
+
+            return resultingUser;
         }
 
         /// <summary>

@@ -18,7 +18,32 @@ namespace DebateScheduler
 
         protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)
         {
-            DatabaseHandler.AuthenticateUsernamePassword(Login1.UserName, Login1.Password);
+            User newUser = DatabaseHandler.AuthenticateUsernamePassword(Login1.UserName, Login1.Password);
+            if (newUser != null) //If the new user is not null then the login did not fail.
+            {
+                Help.AddUserSession(Session, newUser);
+                Login1.Visible = false;
+                Panel_logout.Visible = true;
+                FillLogout();
+            }
+            else
+            {
+                //Error occured logging in..
+            }
+        }
+
+        private void FillLogout()
+        {
+            User user = Help.GetUserSession(Session);
+            Label_Username.Text = user.Username;
+            Label_Permissions.Text = Help.GetPermissionName(user.PermissionLevel);
+        }
+
+        protected void Button_Logout_Click(object sender, EventArgs e)
+        {
+            Help.EndSession(Session);
+            Panel_logout.Visible = false;
+            Login1.Visible = true;
         }
     }
 }

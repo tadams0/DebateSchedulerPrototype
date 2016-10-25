@@ -17,6 +17,17 @@
         <div id ="Login">
             <asp:Login ID="Login1" runat="server" Height="41px" Width="269px" BorderStyle="None" TitleText="" OnAuthenticate="Login1_Authenticate">
             </asp:Login>
+        <div id ="Logout">
+
+            <asp:Panel ID="Panel_logout" runat="server" BorderStyle="None" Font-Size="Medium" Height="83px" HorizontalAlign="Center" Visible="False" Width="177px">
+                <asp:Label ID="Label_Username" runat="server" Text="username" Font-Size="Large" Height="20px"></asp:Label>
+                <br />
+                <asp:Label ID="Label_Permissions" runat="server" Font-Size="Small" ForeColor="Red" Height="15px" Text="Label"></asp:Label>
+                <br />
+                <asp:Button ID="Button_Logout" runat="server" OnClick="Button_Logout_Click" Text="Logout" />
+            </asp:Panel>
+
+        </div>
         </div>
     &nbsp;</header>
     <div>

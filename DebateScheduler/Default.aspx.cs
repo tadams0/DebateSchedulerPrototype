@@ -13,5 +13,15 @@ namespace DebateScheduler
         {
 
         }
+
+        protected void Button_Test1_Click(object sender, EventArgs e)
+        {
+            DatabaseHandler.AddUser(Session, new DebateScheduler.User(2, "NewRefDude", 0), "123", "test@Test.com");
+        }
+
+        protected void Button_Test2_Click(object sender, EventArgs e)
+        {
+            DatabaseHandler.RemoveUser(Session, "NewRefDude");
+        }
     }
 }

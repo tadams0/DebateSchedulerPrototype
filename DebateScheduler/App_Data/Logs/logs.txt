@@ -1,0 +1,8 @@
+Name: admin Message: " added a new user named NewRefDude with ID of 0." Logged at 10/25/2016 12:16:22 PM server time.
+Username: admin Message: "admin removed a user named NewRefDude." Logged at 10/25/2016 12:32:13 PM server time.
+Username: admin Message: "admin added a new user named NewRefDude." Logged at 10/25/2016 12:33:13 PM server time.
+Username: admin Message: "admin removed a user named NewRefDude." Logged at 10/25/2016 12:33:15 PM server time.
+Username: admin Message: "admin added a new user named NewRefDude." Logged at 10/25/2016 12:33:16 PM server time.
+Username: admin Message: "admin removed a user named NewRefDude." Logged at 10/25/2016 12:33:18 PM server time.
+Username: admin Message: "admin added a new user named NewRefDude." Logged at 10/25/2016 12:33:49 PM server time.
+Username: admin Message: "admin removed a user named NewRefDude." Logged at 10/25/2016 12:34:43 PM server time.

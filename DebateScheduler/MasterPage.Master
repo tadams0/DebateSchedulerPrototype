@@ -15,7 +15,7 @@
     <header>
         Where's the Right Click?
         <div id ="Login">
-            <asp:Login ID="Login1" runat="server" Height="41px" Width="269px" BorderStyle="None" TitleText="" OnAuthenticate="Login1_Authenticate">
+            <asp:Login ID="Login1" runat="server" Height="41px" Width="269px" BorderStyle="None" TitleText="" OnAuthenticate="Login1_Authenticate" CreateUserText="Create User" CreateUserUrl="Register.aspx" PasswordRecoveryText="Recover Lost Password" PasswordRecoveryUrl="RecoverPassword.aspx">
             </asp:Login>
         <div id ="Logout">
 

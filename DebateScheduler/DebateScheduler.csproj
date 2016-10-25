@@ -83,6 +83,9 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="MainStyle.css" />
+    <Content Include="RecoverPassword.aspx" />
+    <Content Include="Register.aspx" />
+    <Content Include="RegisterStyle.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -108,6 +111,21 @@
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecoverPassword.aspx.cs">
+      <DependentUpon>RecoverPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RecoverPassword.aspx.designer.cs">
+      <DependentUpon>RecoverPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Team.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>

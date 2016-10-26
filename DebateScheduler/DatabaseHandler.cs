@@ -370,6 +370,30 @@ namespace DebateScheduler
         }
 
         /// <summary>
+        /// Gets a list of all the teams in the database.
+        /// </summary>
+        /// <returns>Returns a list populated with all the teams in the database.</returns>
+        public static List<Team> GetTeams()
+        {
+            List<Team> teams = new List<Team>();
+
+            DataTable table = GetDataTable(GetConnectionStringUsersTable(), "Teams", "exception occured while gathering the team table.");
+
+            foreach (DataRow row in table.Rows) //Iterates through each row retrieved.
+            {
+                int id = (int)row["Id"];
+                string teamName = row["Name"] as string;
+                int wins = (int)row["Wins"];
+                int losses = (int)row["Losses"];
+                int ties = (int)row["Ties"];
+                int totalScore = (int)row["TotalScore"];
+                teams.Add(new Team(teamName, id, wins, losses, ties, totalScore)); //Creates a new team object for the team list.
+            }
+
+            return teams;
+        }
+
+        /// <summary>
         /// Gets the path to the App_Data folder which contains data for the application.
         /// </summary>
         /// <returns></returns>

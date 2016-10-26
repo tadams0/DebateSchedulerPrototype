@@ -78,5 +78,14 @@ namespace DebateScheduler
             this.totalScore = totalScore;
         }
 
+        /// <summary>
+        /// Gets the string representation of the team object.
+        /// </summary>
+        /// <returns>Returns a string representation of the team object including all the stats it contains. It excludes the ID.</returns>
+        public override string ToString()
+        {
+            return "{ Name: " + name + ", Wins: " + wins + ", Losses: " + losses + ", Ties: " + ties + ", Total Score: " + totalScore + " }";
+        }
+
     }
 }

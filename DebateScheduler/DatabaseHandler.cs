@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.SessionState;
 
@@ -44,6 +45,12 @@ namespace DebateScheduler
         private static int permissionToAddUsers = 3;
 
         private static int permissionToRemoveUsers = 3;
+
+        private static int permissionToAddTeams = 3;
+
+        private static int permissionToUpdateTeams = 3;
+
+        private static int permissionToRemoveTeams = 3;
 
         /// <summary>
         /// Gets a data table in a database.
@@ -319,8 +326,8 @@ namespace DebateScheduler
 
                 if (!UserExists(realUsername)) //If the username does not exist.
                 {
-                    string sqlQuery = "INSERT INTO Users (Name, Password, Permissions, Email) VALUES " + //Id, 
-                        "('" + realUsername + "', '" + password + "', '" + newUser.PermissionLevel + "', " + realEmail + "')"; //'" + newUser.ID + "', 
+                    string sqlQuery = "INSERT INTO Users (Name, Password, Permissions, Email) VALUES " +
+                        "('" + realUsername + "', '" + password + "', '" + newUser.PermissionLevel + "', " + realEmail + "')"; //TODO: Sanitize the username.
 
                     SqlDataReader result = ExecuteSQL(GetConnectionStringUsersTable(), sqlQuery, "exception occured while adding a user.");
                     if (result != null) //If the result is not null, then the query succeeded and should be logged.
@@ -372,7 +379,7 @@ namespace DebateScheduler
         /// <summary>
         /// Gets a list of all the teams in the database.
         /// </summary>
-        /// <returns>Returns a list populated with all the teams in the database.</returns>
+        /// <returns>Returns a list populated with all the teams in the database. Returns an empty list if there are no teams in the database.</returns>
         public static List<Team> GetTeams()
         {
             List<Team> teams = new List<Team>();
@@ -391,6 +398,198 @@ namespace DebateScheduler
             }
 
             return teams;
+        }
+
+        /// <summary>
+        /// Gets a team from the database based on their ID.
+        /// </summary>
+        /// <param name="id">The ID of the team.</param>
+        /// <returns>Returns a team object which contains all the data of the matching team in the database. This will be null if there is no matching team.</returns>
+        public static Team GetTeam(int id)
+        {
+            Team newTeam = null;
+
+            DataTable table = GetDataTable(GetConnectionStringUsersTable(), "Teams", "Id", id.ToString(), SqlDbType.Int, int.MaxValue, "exception occured while gathering a single team by ID.");
+
+            if (table.Rows.Count > 0)
+            {
+                int matchedID = (int)table.Rows[0]["Id"];
+                string teamName = table.Rows[0]["Name"] as string;
+                int wins = (int)table.Rows[0]["Wins"];
+                int losses = (int)table.Rows[0]["Losses"];
+                int ties = (int)table.Rows[0]["Ties"];
+                int totalScore = (int)table.Rows[0]["TotalScore"];
+                newTeam = new Team(teamName, matchedID, wins, losses, ties, totalScore); //The resulting team object.
+            }
+
+            return newTeam;
+        }
+
+        /// <summary>
+        /// Gets a team from the database based on their name.
+        /// </summary>
+        /// <param name="name">The name of the team to search for.</param>
+        /// <returns>Returns a team object which contains all the data of the matching team in the database. This will be null if there is no matching team.</returns>
+        public static Team GetTeam(string name)
+        {
+            Team newTeam = null;
+
+            DataTable table = GetDataTable(GetConnectionStringUsersTable(), "Teams", "Name", name, SqlDbType.NChar, 50, "exception occured while gathering a single team by name.");
+
+            if (table.Rows.Count > 0)
+            {
+                int id = (int)table.Rows[0]["Id"];
+                string teamName = table.Rows[0]["Name"] as string;
+                int wins = (int)table.Rows[0]["Wins"];
+                int losses = (int)table.Rows[0]["Losses"];
+                int ties = (int)table.Rows[0]["Ties"];
+                int totalScore = (int)table.Rows[0]["TotalScore"];
+                newTeam = new Team(teamName, id, wins, losses, ties, totalScore); //The resulting team object.
+            }
+
+            return newTeam;
+        }
+
+        /// <summary>
+        /// Adds the given team to the database.
+        /// </summary>
+        /// <param name="session">The session of the user who is adding the team.</param>
+        /// <param name="newTeam">The new team that is being added. ID is ignored.</param>
+        /// <returns>Returns true if the team was successfully added to the database, false if it was not added.</returns>
+        public static bool AddTeam(HttpSessionState session, Team newTeam)
+        {
+            User currentSessionUser = Help.GetUserSession(session); //Get the current user who is running this code.
+
+            if (currentSessionUser != null && currentSessionUser.PermissionLevel >= permissionToAddTeams && newTeam != null) //If the given team is not null and proper permissions are matched.
+            {
+                Team matchedTeam = GetTeam(newTeam.Name);
+
+                if (matchedTeam == null) //If there is no team that matches names.
+                {
+                    string sqlQuery = "INSERT INTO Teams (Name, Wins, Losses, Ties, TotalScore) VALUES " + //Id, 
+                        "(@TeamName, '" + newTeam.Wins + "', '" + newTeam.Losses + "', '" + newTeam.Ties + "', '" + newTeam.TotalScore + "')"; //'" + newUser.ID + "', 
+                    SqlParameter teamName = new SqlParameter("@TeamName", SqlDbType.NChar, newTeam.Name.Length);
+                    teamName.Value = newTeam.Name;
+
+                    SqlDataReader result = ExecuteSQL(GetConnectionStringUsersTable(), sqlQuery, "exception occured while adding a team.", teamName);
+                    if (result != null) //If the result is not null, then the query succeeded and should be logged.
+                    {
+                        Log(currentSessionUser.Username, currentSessionUser.Username + " added a new team with parameters " + newTeam.ToString() + ".");
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Updates the team with a matching id as the given team, and replaces all data of the database copy with the given copy.
+        /// </summary>
+        /// <param name="session">The session that is updating the team.</param>
+        /// <param name="team">The new team data that the database will hold.</param>
+        /// <returns>Returns true if the team was successfully updated, false if an error occured or permissions were not high enough.</returns>
+        public static bool UpdateTeam(HttpSessionState session, Team team)
+        {
+            User updatingUser = Help.GetUserSession(session);
+            if (updatingUser != null && updatingUser.PermissionLevel >= permissionToUpdateTeams) //If the user's permission level is high enough
+            {
+                Team previousTeamData = GetTeam(team.ID); //We get the team data that currently exists in the database...
+                if (previousTeamData != null) //We ensure that the data exists, otherwise we cannot update something that doesn't exist.
+                {
+                    string sqlQuery = "UPDATE Teams SET " +
+                                "Name = @Name, Wins = @Wins, Losses = @Losses, Ties = @Ties, TotalScore = @TotalScore" +
+                                " WHERE Id = " + team.ID;
+                    //ID is omitted because changing it will result in incorrect foreign keys in the debates table.
+
+                    //Generating the parameters, this is done for sanitization reasons.
+                    SqlParameter name = new SqlParameter("@Name", SqlDbType.NChar, team.Name.Length); //It is important the size is the size of the string and no the max limit.
+                    name.Value = team.Name;
+                    SqlParameter wins = new SqlParameter("@Wins", SqlDbType.Int);
+                    wins.Value = team.Wins;
+                    SqlParameter losses = new SqlParameter("@Losses", SqlDbType.Int);
+                    losses.Value = team.Losses;
+                    SqlParameter ties = new SqlParameter("@Ties", SqlDbType.Int);
+                    ties.Value = team.Ties;
+                    SqlParameter totalScore = new SqlParameter("@TotalScore", SqlDbType.Int);
+                    totalScore.Value = team.TotalScore;
+
+                    SqlDataReader result = ExecuteSQL(GetConnectionStringUsersTable(), sqlQuery, "exception occured while updating a team.",
+                        name, wins, losses, ties, totalScore);
+
+                    if (result != null)
+                    {
+                        Log(updatingUser.Username,
+                            updatingUser.Username + " updated a team from " + previousTeamData.ToString() + " to " + team.ToString());
+
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Removes all data of the team with the matching id of the given id.
+        /// </summary>
+        /// <param name="session">The current session, used to determine the user performing this action.</param>
+        /// <param name="id">The id of the team to remove.</param>
+        /// <returns>Returns true if the team was properly removed, false if it was not.</returns>
+        public static bool RemoveTeam(HttpSessionState session, int id)
+        {
+            User currentSessionUser = Help.GetUserSession(session); //Get the current user who is running this code.
+            if (currentSessionUser != null && currentSessionUser.PermissionLevel >= permissionToRemoveTeams) //If the user exists and their permission level is super referee or greater...
+            {
+                Team team = GetTeam(id); //We get the team if it exists in the database (there are probably faster ways, but this works well enough).
+                if (team != null) //We ensure that the team exists.
+                {
+                    string sqlQuery = "DELETE FROM Teams WHERE Id = @Value";
+                    SqlParameter parameter = new SqlParameter("@Value", SqlDbType.Int);
+                    parameter.Value = id;
+
+                    SqlDataReader result = ExecuteSQL(GetConnectionStringUsersTable(), sqlQuery, "exception occured while removing a team by id.", parameter);
+
+                    if (result != null) //If the result is not null, then the query succeeded and should be logged.
+                    {
+                        Log(currentSessionUser, currentSessionUser.Username + " removed a team with the data of " + team.ToString());
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Removes all data of the team with the matching name of the given name.
+        /// </summary>
+        /// <param name="session">The current session, used to determine the user performing this action.</param>
+        /// <param name="teamName">The team name of the team to remove.</param>
+        /// <returns>Returns true if the team was properly removed, false if it was not.</returns>
+        public static bool RemoveTeam(HttpSessionState session, string teamName)
+        {
+            User currentSessionUser = Help.GetUserSession(session); //Get the current user who is running this code.
+            if (currentSessionUser != null && currentSessionUser.PermissionLevel >= permissionToRemoveTeams) //If the user exists and their permission level is super referee or greater...
+            {
+                Team team = GetTeam(teamName); //We get the team if it exists in the database (there are probably faster ways, but this works well enough).
+                if (team != null) //We ensure that the team exists.
+                {
+                    string sqlQuery = "DELETE FROM Teams WHERE Name = @Value";
+                    SqlParameter parameter = new SqlParameter("@Value", SqlDbType.NChar, teamName.Length);
+                    parameter.Value = teamName;
+
+                    SqlDataReader result = ExecuteSQL(GetConnectionStringUsersTable(), sqlQuery, "exception occured while removing a team by name.", parameter);
+
+                    if (result != null) //If the result is not null, then the query succeeded and should be logged.
+                    {
+                        Log(currentSessionUser, currentSessionUser.Username + " removed a team with the data of " + team.ToString());
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -459,6 +658,12 @@ namespace DebateScheduler
         /// <param name="info">Additional information to log along with the exception, it is generally a good idea to include where the exception occured. IE: logging in, editing data, etc...</param>
         private static void LogException(Exception e, string info)
         {
+
+            if (fullLogPath == string.Empty) //there is no full path, so one must be constructed.
+            {
+                CreateLogPath();
+            }
+
             try
             {
                 Directory.CreateDirectory(fullLogPath);
@@ -468,7 +673,7 @@ namespace DebateScheduler
                     writer.WriteLine("Exception with message  \"" + e.Message + "\" was found. Additional Info: \"" + info + "\" logged at " + DateTime.Now); //Logs the message to the exception file.
                 }
             }
-            catch //(Exception exception)
+            catch
             {
                 //Well an exception occured, but it cannot be logged since this is the method for logging it. In this case we do nothing really.
             }

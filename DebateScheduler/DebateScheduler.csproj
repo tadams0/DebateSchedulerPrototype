@@ -84,8 +84,10 @@
     <Content Include="Global.asax" />
     <Content Include="MainStyle.css" />
     <Content Include="RecoverPassword.aspx" />
+    <Content Include="RefereeView.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="RegisterStyle.css" />
+    <Content Include="SuperView.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -118,12 +120,26 @@
     <Compile Include="RecoverPassword.aspx.designer.cs">
       <DependentUpon>RecoverPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="RefereeView.aspx.cs">
+      <DependentUpon>RefereeView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RefereeView.aspx.designer.cs">
+      <DependentUpon>RefereeView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SuperView.aspx.cs">
+      <DependentUpon>SuperView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SuperView.aspx.designer.cs">
+      <DependentUpon>SuperView.aspx</DependentUpon>
     </Compile>
     <Compile Include="Team.cs" />
     <Compile Include="User.cs" />

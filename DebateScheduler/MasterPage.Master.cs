@@ -24,6 +24,10 @@ namespace DebateScheduler
                 Help.AddUserSession(Session, newUser);
                 Login1.Visible = false;
                 Panel_logout.Visible = true;
+                if (newUser.PermissionLevel == 2)
+                    Server.Transfer("RefereeView.aspx", true);
+                else if (newUser.PermissionLevel == 3)
+                    Server.Transfer("SuperView.aspx", true);
                 FillLogout();
             }
             else

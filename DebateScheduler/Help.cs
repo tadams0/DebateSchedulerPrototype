@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.SessionState;
@@ -11,6 +12,8 @@ namespace DebateScheduler
     /// </summary>
     public static class Help
     {
+        private static readonly string DateFormat = "O";
+
         /// <summary>
         /// Gets the user object from the current session.
         /// </summary>
@@ -68,6 +71,26 @@ namespace DebateScheduler
                 case "Referee": return 2;
                 case "Super Referee": return 3;
             }
+        }
+
+        /// <summary>
+        /// Gets a string representation of a given date in a specific format type.
+        /// </summary>
+        /// <param name="date">The date to turn into a string.</param>
+        /// <returns>Returns a string representation of the date.</returns>
+        public static string GetDateString(DateTime date)
+        {
+            return date.ToString(DateFormat);
+        }
+
+        /// <summary>
+        /// Gets a date from a given string.
+        /// </summary>
+        /// <param name="date">The string representation of the date.</param>
+        /// <returns>Returns a date time parsed back from a string.</returns>
+        public static DateTime GetDate(string date)
+        {
+            return DateTime.ParseExact(date, DateFormat, CultureInfo.InvariantCulture);
         }
 
     }

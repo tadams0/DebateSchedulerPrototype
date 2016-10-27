@@ -13,7 +13,9 @@ namespace DebateScheduler
         {
             //Setting up the server side backend for database related stuffs
             AppDomain.CurrentDomain.SetData("DataDirectory", DatabaseHandler.GetAppDataPath());
-            FillLogout();
+            User user = Help.GetUserSession(Session);
+            if (user != null)
+                FillLogout();
         }
 
         protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)
@@ -51,7 +53,7 @@ namespace DebateScheduler
         {
             Help.EndSession(Session);
             Panel_logout.Visible = false;
-            Login1.Visible = true;
+            Login1.Visible = true;           
         }
     }
 }

@@ -4,19 +4,14 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
     <p style="height: 515px; width: 931px;">
         <asp:Label ID="Label3" runat="server" style="top: 399px; left: 546px; position: absolute; height: 21px; width: 105px" Text="Team 2 Score:"></asp:Label>
-        <asp:DropDownList ID="DropDownList1" runat="server" style="top: 354px; left: 678px; position: absolute; height: 22px; width: 77px">
-            <asp:ListItem>Forfiet</asp:ListItem>
+        <asp:DropDownList ID="DropDownList1" runat="server" style="top: 354px; left: 678px; position: absolute; height: 16px; width: 77px">
+            <asp:ListItem>Forfeit</asp:ListItem>
             <asp:ListItem>1</asp:ListItem>
             <asp:ListItem Value="2"></asp:ListItem>
             <asp:ListItem Value="3"></asp:ListItem>
             <asp:ListItem>4</asp:ListItem>
             <asp:ListItem>5</asp:ListItem>
         </asp:DropDownList>
-        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:UserTable %>" SelectCommand="SELECT [T1Score] FROM [Debates] WHERE ([Id] = @Id)">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="GridView1" Name="Id" PropertyName="SelectedValue" Type="Int32" />
-            </SelectParameters>
-        </asp:SqlDataSource>
         <asp:DropDownList ID="DropDownList2" runat="server" style="top: 399px; left: 677px; position: absolute; height: 22px; width: 77px">
             <asp:ListItem>Forfeit</asp:ListItem>
             <asp:ListItem>1</asp:ListItem>
@@ -25,11 +20,6 @@
             <asp:ListItem>4</asp:ListItem>
             <asp:ListItem>5</asp:ListItem>
         </asp:DropDownList>
-        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:UserTable %>" SelectCommand="SELECT [T2Score] FROM [Debates] WHERE ([Id] = @Id)">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="GridView1" Name="Id" PropertyName="SelectedValue" Type="Int32" />
-            </SelectParameters>
-        </asp:SqlDataSource>
         <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" DataKeyNames="Id" DataSourceID="SqlDataSource1" ForeColor="Black" style="top: 219px; left: 2px; position: absolute; height: 397px; width: 412px">
             <Columns>
                 <asp:CommandField ShowSelectButton="True" />
@@ -55,6 +45,12 @@
         <asp:Label ID="Label2" runat="server" style="top: 357px; left: 544px; position: absolute; height: 14px; width: 111px" Text="Team 1 Score:"></asp:Label>
         d<asp:CheckBox ID="CheckBox1" runat="server" style="top: 451px; left: 679px; position: absolute; height: 22px; width: 106px" Text="Reschedule" />
         <asp:Button ID="Button1" runat="server" style="top: 515px; left: 677px; position: absolute; height: 26px; width: 56px" Text="Submit" />
-        <asp:Label ID="Label5" runat="server" style="top: 304px; left: 673px; position: absolute; height: 22px; width: 68px" Text="Label"></asp:Label>
+        <asp:DropDownList ID="DropDownList3" runat="server" DataSourceID="SqlDataSource2" DataTextField="Id" DataValueField="Id" style="top: 307px; left: 679px; position: absolute; height: 20px; width: 76px">
+        </asp:DropDownList>
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:UserTable %>" SelectCommand="SELECT [Id] FROM [Debates] WHERE ([Id] = @Id)">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="GridView1" Name="Id" PropertyName="SelectedValue" Type="Int32" />
+            </SelectParameters>
+        </asp:SqlDataSource>
     </p>
 </asp:Content>

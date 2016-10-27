@@ -16,26 +16,21 @@ namespace DebateScheduler
 
         }
 
-        protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
-        {
+        /// <summary>
+        /// Gets Debate Id, Score1, and Score2 from the DropDownBoxes and updates the debate with the correct Id.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Button1_Click(object sender, EventArgs e)
+        {            
+            int DebateID = Int32.Parse(DropDownList3.SelectedValue);
+            int Score1 = Int32.Parse(DropDownList1.SelectedValue);
+            int Score2 = Int32.Parse(DropDownList2.SelectedValue);
+            Debate debate = DatabaseHandler.GetDebate(DebateID);
+            debate.Team1Score = Score1;
+            debate.Team2Score = Score2;
 
+            DatabaseHandler.UpdateDebate(Session, debate);
         }
-
-        /*protected void Button1_Click(object sender, EventArgs e)
-        {
-            string connection = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=False; User Id=right; password= click";
-            
-            int DebateID;
-            int Score1;
-            int Score2;
-            bool TestBool = Int32.TryParse(DropDownList3.SelectedValue, out DebateID);
-            bool Test1Bool = Int32.TryParse(DropDownList1.SelectedValue, out Score1);
-            bool Test2Bool = Int32.TryParse(DropDownList2.SelectedValue, out Score2);
-            SqlParameter[] param = { Score1, Score2, DebateID };
-
-
-            string updateQuery = "UPDATE Debates SET Team1Score =@Score1, Team2Score =@Score2 WHERE Id=@DebateID";
-            DebateHandler.ExecuteSqlQuery(connection, updateQuery, param);
-        }*/
     }
 }

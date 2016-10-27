@@ -5,21 +5,55 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 namespace DebateScheduler
 {
     public partial class Register : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            DebateScheduler.User user = Help.GetUserSession(Session);
+            if (user != null)
+            {
+                CreateUserWizard.Visible = false;
+            }
+            Label_UserCreated.Visible = false;
+            Label_ErrorMessage.Visible = false;
         }
 
-        protected void CreateUserWizard_CreatedUser(object sender, EventArgs e)
+        protected void CreateUserWizard_CreatingUser(object sender, LoginCancelEventArgs e)
         {
-            string ipAddress = Request.UserHostAddress;
 
-            DatabaseHandler.AddUser(ipAddress, new DebateScheduler.User(0, CreateUserWizard.UserName, 0), CreateUserWizard.Password, CreateUserWizard.Email);
+            e.Cancel = true;
+
+            if (CreateUserWizard.UserName.Contains('%'))
+            {
+                Label_ErrorMessage.Text = "Username cannot contain %";
+                Label_ErrorMessage.Visible = true;
+            }
+            else
+            {
+                string ipAddress = Request.UserHostAddress;
+
+                bool result = DatabaseHandler.AddUser(ipAddress, new DebateScheduler.User(0, CreateUserWizard.UserName, 0), CreateUserWizard.Password, CreateUserWizard.Email);
+
+                if (result)
+                {
+                    Label_UserCreated.Visible = true;
+                    CreateUserWizard.Visible = false;
+                    Label_ErrorMessage.Visible = false;
+                }
+                else
+                {
+                    Label_ErrorMessage.Text = "Username already exists.";
+                    Label_ErrorMessage.Visible = true;
+                }
+            }
+
 
         }
+
+        
     }
 }

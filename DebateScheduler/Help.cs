@@ -52,7 +52,7 @@ namespace DebateScheduler
         {
             switch (permissionLevel)
             {
-                default: return "Permissionless :(";
+                default: return "Regular User";
                 case 2: return "Referee";
                 case 3: return "Super Referee";
             }

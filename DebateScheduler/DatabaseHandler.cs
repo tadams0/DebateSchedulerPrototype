@@ -363,9 +363,17 @@ namespace DebateScheduler
                 if (!UserExists(realUsername)) //If the username does not exist.
                 {
                     string sqlQuery = "INSERT INTO Users (Name, Password, Permissions, Email) VALUES " +
-                        "('" + realUsername + "', '" + password + "', '" + newUser.PermissionLevel + "', " + realEmail + "')"; //TODO: Sanitize the username.
+                        "(@Username, @Password, '" + newUser.PermissionLevel + "', @Email)"; //TODO: Sanitize the username.
 
-                    SqlDataReader result = ExecuteSQL(GetConnectionStringUsersTable(), sqlQuery, "exception occured while adding a user.");
+                    SqlParameter username = new SqlParameter("@Username", SqlDbType.NChar, newUser.Username.Length);
+                    username.Value = realUsername;
+                    SqlParameter passwordParameter = new SqlParameter("@Password", SqlDbType.NChar, password.Length);
+                    passwordParameter.Value = password;
+                    SqlParameter emailParameter = new SqlParameter("@Email", SqlDbType.NChar, realEmail.Length);
+                    emailParameter.Value = realEmail;
+
+                    SqlDataReader result = ExecuteSQL(GetConnectionStringUsersTable(), sqlQuery, "exception occured while adding a user.",
+                        username, passwordParameter, emailParameter);
                     if (result != null) //If the result is not null, then the query succeeded and should be logged.
                     {
                         Log(ipAddress, ipAddress + " (IP) added a new user named " + newUser.Username + ".");

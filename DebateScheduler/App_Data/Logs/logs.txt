@@ -23,3 +23,5 @@ Username: admin Message: "admin added a new debate with parameters { Team 1 ID: 
 Username: admin Message: "admin added a new debate with parameters { Team 1 ID: 1, Team 1 Score: 3, Team 2 ID: 2, Team 2 Score: 5, On Date: 10/15/2016 12:00:00 AM and takes place in the afternoon }." Logged at 10/26/2016 5:01:36 PM server time.
 Username: admin Message: "admin added a new debate with parameters { Team 1 ID: 2, Team 1 Score: 1, Team 2 ID: 3, Team 2 Score: 5, On Date: 10/22/2016 12:00:00 AM and takes place in the morning }." Logged at 10/26/2016 5:01:36 PM server time.
 Username: admin Message: "admin added a new debate with parameters { Team 1 ID: 1, Team 1 Score: 5, Team 2 ID: 3, Team 2 Score: 3, On Date: 10/22/2016 12:00:00 AM and takes place in the afternoon }." Logged at 10/26/2016 5:01:37 PM server time.
+Username: ::1 Message: "::1 (IP) added a new user named test." Logged at 10/27/2016 11:51:36 AM server time.
+Username: ::1 Message: "::1 (IP) added a new user named test2." Logged at 10/27/2016 12:11:47 PM server time.

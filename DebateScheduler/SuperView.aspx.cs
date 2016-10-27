@@ -13,5 +13,17 @@ namespace DebateScheduler
         {
 
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void GridView1_SelectedIndexChanged(Object sender, EventArgs e)
+        {
+            GridViewRow row = GridView1.SelectedRow;
+            Label5.Text = row.Cells[5].Text;
+        }
+
     }
 }

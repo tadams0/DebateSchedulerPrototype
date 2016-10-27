@@ -9,6 +9,8 @@ namespace DebateScheduler
 {
     public partial class MasterPage : System.Web.UI.MasterPage
     {
+        public int PermissionLevel { get; private set; } = 0;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             //Setting up the server side backend for database related stuffs
@@ -16,6 +18,24 @@ namespace DebateScheduler
             User user = Help.GetUserSession(Session);
             if (user != null)
                 FillLogout();
+
+            if (!Page.IsPostBack)
+            CheckPermissions(user);
+
+        }
+
+        public void SetPagePermissionLevel(int permissionLevel)
+        {
+            PermissionLevel = permissionLevel;
+        }
+
+        private void CheckPermissions(User user)
+        {
+            if (user == null || user.PermissionLevel <= PermissionLevel)
+            {
+                if (Request.Url.AbsolutePath.ToUpperInvariant() != "/default.aspx".ToUpperInvariant())
+                    Response.Redirect("Default.aspx");
+            }
         }
 
         protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)
@@ -53,7 +73,8 @@ namespace DebateScheduler
         {
             Help.EndSession(Session);
             Panel_logout.Visible = false;
-            Login1.Visible = true;           
+            Login1.Visible = true;
+            CheckPermissions(null);       
         }
     }
 }

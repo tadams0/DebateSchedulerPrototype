@@ -97,34 +97,35 @@ namespace DebateScheduler
         /// </summary>
         /// <param name="teamList">The list of teams in a season.</param>
         /// <returns>Returns a list of debates for the season.</returns>
-        public static List<Debate> MatchMake (List<Team> teamList)
-            {
+        public static List<Debate> MatchMake(List<Team> teamList)
+        {
             List<Debate> MatchList = new List<Debate>();
-            
-            if (teamList.Count <=1)
+
+            if (teamList.Count <= 1)
             {
-                return (MatchList.Add(new Debate(new Team("Error: Not enough teams", 0, 0, 0, 0, 0), new Team("", 1, 0, 0, 0, 0), 0, 0, true)));
+                MatchList.Add(new Debate(0, new Team("Error: Not enough teams", 0, 0, 0, 0, 0), new Team("", 1, 0, 0, 0, 0), 0, 0, DateTime.Now, true));
+                
             }
             for (int i = 0; i < teamList.Count - 1; i++)
             {
                 bool alreadyDebated = false;
                 for (int j = 1; j < teamList.Count; j++)
                 {
-                    DateTime matchDate = DateTime.Today.AddDays(7*j -7);
-                    if (alreadyDebated = false)
+                    DateTime matchDate = DateTime.Today.AddDays(7 * j - 7);
+                    if (!alreadyDebated)
                     {
-                        MatchList.Add(new Debate(teamList(0), teamList(j), 0, matchDate, true));
+                        MatchList.Add(new Debate(0, teamList[0], teamList[j], 0, 0, matchDate, true));
                         alreadyDebated = true;
                     }
                     else
                     {
-                        MatchList.Add(new Debate(teamList(0), teamList(j), 0, matchDate, false));
+                        MatchList.Add(new Debate(0, teamList[0], teamList[j], 0, 0, matchDate, false));
                         alreadyDebated = false;
                     }
                 }
-                teamList.Remove(0);
+                teamList.RemoveAt(0);
             }
             return (MatchList);
-            }
+        }
     }
 }

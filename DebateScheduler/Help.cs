@@ -92,39 +92,68 @@ namespace DebateScheduler
         {
             return DateTime.ParseExact(date, DateFormat, CultureInfo.InvariantCulture);
         }
+        public static List<DateTime> SatBetween(DateTime StartDate, DateTime EndDate)
+        {
+            if (StartDate.DayOfWeek != DayOfWeek.Saturday)
+            {
+                while (StartDate.DayOfWeek != DayOfWeek.Saturday)
+                {
+                    StartDate.AddDays(1);
+                }
+            }
+            if (EndDate.DayOfWeek != DayOfWeek.Saturday)
+            {
+                while (EndDate.DayOfWeek != DayOfWeek.Saturday)
+                {
+                    EndDate.AddDays(-1);
+                }
+
+            }
+            List<DateTime> dateList = new List<DateTime>();
+            do
+            {
+                dateList.Add(StartDate);
+                StartDate.AddDays(7);
+            } while (StartDate <= EndDate);
+            return (dateList);
+        }
         /// <summary>
         /// creates every match for the season.
         /// </summary>
         /// <param name="teamList">The list of teams in a season.</param>
         /// <returns>Returns a list of debates for the season.</returns>
-        public static List<Debate> MatchMake (List<Team> teamList)
+        public static List<TeamPair> MatchMake(List<DateTime> Saturdays, List<Team> teamList)
+        {
+            int n = teamList.Count;
+            //satList = satList.OrderBy(Saturday => Saturday.date);
+            List<TeamPair> teamPairs = new List<TeamPair>((n * (n - 1)) / 2);
+            for (int i = 0; i < teamList.Count; i++)
             {
-            List<Debate> MatchList = new List<Debate>();
-            
-            if (teamList.Count <=1)
-            {
-                return (MatchList.Add(new Debate(new Team("Error: Not enough teams", 0, 0, 0, 0, 0), new Team("", 1, 0, 0, 0, 0), 0, 0, true)));
-            }
-            for (int i = 0; i < teamList.Count - 1; i++)
-            {
-                bool alreadyDebated = false;
-                for (int j = 1; j < teamList.Count; j++)
+                for (int j = i + 1; j < teamList.Count; j++)
                 {
-                    DateTime matchDate = DateTime.Today.AddDays(7*j -7);
-                    if (alreadyDebated = false)
-                    {
-                        MatchList.Add(new Debate(teamList(0), teamList(j), 0, matchDate, true));
-                        alreadyDebated = true;
-                    }
-                    else
-                    {
-                        MatchList.Add(new Debate(teamList(0), teamList(j), 0, matchDate, false));
-                        alreadyDebated = false;
-                    }
+                    teamPairs.Add(new TeamPair(i, teamList[i], teamList[j], 0, 0, DateTime.Today, true, Guid.NewGuid()));
                 }
-                teamList.Remove(0);
             }
-            return (MatchList);
+
+            teamPairs = teamPairs.OrderBy(a => a.ID).ToList();
+            int currentSaturday = 0;
+            for (int i = 0; i < teamPairs.Count / 2; i++)
+            {
+                teamPairs[i].MorningDebate = true;
+                teamPairs[i].Date = Saturdays[currentSaturday];
+                currentSaturday++;
+                if (currentSaturday >= Saturdays.Count)
+                    currentSaturday = 0;
             }
+            for (int i = teamPairs.Count / 2 + 1; i < teamPairs.Count - 1; i++)
+            {
+                teamPairs[i].MorningDebate = false;
+                teamPairs[i].Date = Saturdays[currentSaturday];
+                currentSaturday++;
+                if (currentSaturday >= Saturdays.Count)
+                    currentSaturday = 0;
+            }
+            return (teamPairs);
+        }
     }
 }

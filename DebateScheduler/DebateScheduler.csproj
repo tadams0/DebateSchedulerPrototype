@@ -143,6 +143,7 @@
       <DependentUpon>SuperView.aspx</DependentUpon>
     </Compile>
     <Compile Include="Team.cs" />
+    <Compile Include="TeamPair.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>

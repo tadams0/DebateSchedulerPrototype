@@ -20,8 +20,7 @@ namespace DebateScheduler
                 FillLogout();
 
             if (!Page.IsPostBack)
-            CheckPermissions(user);
-
+                CheckPermissions(user);
         }
 
         public void SetPagePermissionLevel(int permissionLevel)
@@ -31,7 +30,7 @@ namespace DebateScheduler
 
         private void CheckPermissions(User user)
         {
-            if (user == null || user.PermissionLevel <= PermissionLevel)
+            if (PermissionLevel > 1 && (user == null || user.PermissionLevel <= PermissionLevel))
             {
                 if (Request.Url.AbsolutePath.ToUpperInvariant() != "/default.aspx".ToUpperInvariant())
                     Response.Redirect("Default.aspx");

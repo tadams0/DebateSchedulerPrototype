@@ -1,0 +1,10 @@
+Exception with message  "Incorrect syntax near '0'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 10/30/2016 1:53:24 AM
+Exception with message  "Incorrect syntax near '0'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 10/30/2016 1:55:47 AM
+Exception with message  "Incorrect syntax near '0'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 10/30/2016 1:57:30 AM
+Exception with message  "Incorrect syntax near '1'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 10/30/2016 1:58:34 AM
+Exception with message  "Incorrect syntax near '0'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 10/30/2016 2:00:32 AM
+Exception with message  "Incorrect syntax near '4'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 10/30/2016 2:01:01 AM
+Exception with message  "Incorrect syntax near '4'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 10/30/2016 2:02:13 AM
+Exception with message  "Incorrect syntax near '4'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 10/30/2016 2:04:09 AM
+Exception with message  "Incorrect syntax near '0'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 10/30/2016 2:04:57 AM
+Exception with message  "Incorrect syntax near '0'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 10/30/2016 2:05:14 AM

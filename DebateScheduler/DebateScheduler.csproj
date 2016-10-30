@@ -71,6 +71,7 @@
       <DependentUpon>Database.mdf</DependentUpon>
     </Content>
     <Content Include="Default.aspx" />
+    <Content Include="News.aspx" />
     <Content Include="packages.config" />
     <Content Include="MasterPage.Master" />
     <None Include="Web.Debug.config">
@@ -84,6 +85,7 @@
     <Content Include="Global.asax" />
     <Content Include="MainStyle.css" />
     <Content Include="RecoverPassword.aspx" />
+    <Content Include="RecoveryStyle.css" />
     <Content Include="RefereeView.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="RegisterStyle.css" />
@@ -113,6 +115,14 @@
     <Compile Include="MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
+    <Compile Include="News.aspx.cs">
+      <DependentUpon>News.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="News.aspx.designer.cs">
+      <DependentUpon>News.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewsPost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecoverPassword.aspx.cs">
       <DependentUpon>RecoverPassword.aspx</DependentUpon>

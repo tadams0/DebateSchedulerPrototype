@@ -39,8 +39,10 @@
     </form>
 
     <footer>
-        Web services and application created by Team Where's The Right Click - 2016.
-        </footer>
+   
+        Web services and application created by Team Where's The Right Click - <script> document.write(new Date().toLocaleDateString()); </script>
+
+    </footer>
 </body>
     
 </html>

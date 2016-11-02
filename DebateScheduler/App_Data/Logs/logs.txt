@@ -21,3 +21,5 @@ Username: admin Message: "admin removed a news post with the data of { test 2 }"
 Username: admin Message: "admin removed a news post with the data of { <b><font size="5">testing</font></b> }" Logged at 11/1/2016 9:38:55 PM server time.
 Username: admin Message: "admin updated a news post from { News Post Created By: admin on 10/8/2016 12:00:00 AM } to { News Post Created By: admin on 10/8/2016 12:00:00 AM }" Logged at 11/1/2016 9:40:07 PM server time.
 Username: admin Message: "admin updated a news post from { News Post Created By: admin on 10/8/2016 12:00:00 AM } to { News Post Created By: admin on 10/8/2016 12:00:00 AM }" Logged at 11/1/2016 9:40:57 PM server time.
+Username: admin Message: "admin added a new news post with parameters { News Post Created By: admin on 11/1/2016 11:05:05 PM }." Logged at 11/1/2016 11:05:05 PM server time.
+Username: admin Message: "admin removed a news post with the data of { This is another test }" Logged at 11/1/2016 11:05:29 PM server time.

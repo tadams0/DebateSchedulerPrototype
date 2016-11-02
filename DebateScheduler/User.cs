@@ -18,17 +18,17 @@ namespace DebateScheduler
         /// <summary>
         /// The email of the user.
         /// </summary>
-        public string Email { get; private set; }
+        public string Email { get; set; }
         
         /// <summary>
         /// The security question of the user.
         /// </summary>
-        public string SecurityQuestion { get; private set; }
+        public string SecurityQuestion { get; set; }
 
         /// <summary>
         /// The permission level of the user.
         /// </summary>
-        public int PermissionLevel { get; private set; }
+        public int PermissionLevel { get; set; }
 
         /// <summary>
         /// The id of the user within the database.

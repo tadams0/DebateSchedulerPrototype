@@ -60,6 +60,8 @@ namespace DebateScheduler
         private static int permissionToUpdateNews = 3;
         private static int permissionToRemoveNews = 3;
 
+        private static int permissionToViewLogs = 3;
+
         
         /// <summary>
         /// Gets a data table in a database.
@@ -119,7 +121,10 @@ namespace DebateScheduler
 
             try
             {
-                SqlCommand command = new SqlCommand("SELECT * FROM " + table + " LIMIT " + startingRow + ", " + (endingRow - startingRow), connection);
+                //SqlCommand command = new SqlCommand("SELECT * FROM " + table + " WHERE Id BETWEEN " + startingRow + " AND " + endingRow, connection);
+                //SqlCommand command = new SqlCommand("SELECT * FROM " + table + " LIMIT 10, 10", connection);
+                SqlCommand command = new SqlCommand("SELECT * FROM (SELECT TOP " + endingRow + " ROW_NUMBER() OVER(ORDER BY Id) AS RowNr, * FROM " + table + ") as alias WHERE RowNr BETWEEN " + startingRow + " AND " + endingRow, connection);
+                //SqlCommand command = new SqlCommand("SELECT * FROM " + table + " OFFSET " + startingRow + " ROWS FETCH NEXT " + (endingRow - startingRow) + " ROWS ONLY;", connection);
                 using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                 {
                     resultingTable = new DataTable();
@@ -480,7 +485,7 @@ namespace DebateScheduler
                     string email = table.Rows[0]["Email"] as string;
                     string securityQuestion = table.Rows[0]["SecurityQuestion"] as string;
                     int permissions = (int)table.Rows[0]["Permissions"];
-                    resultingUser = new User(permissions, username, email, securityQuestion, permissions); //NOTE: We use the username we were given not the one in the database. This prevents the username from being all caps.
+                    resultingUser = new User(permissions, username, email, securityQuestion, id); //NOTE: We use the username we were given not the one in the database. This prevents the username from being all caps.
                 }
             }
 
@@ -499,11 +504,11 @@ namespace DebateScheduler
             DataTable table = GetDataTable(GetConnectionStringUsersTable(), "Users", "Id", id.ToString(), SqlDbType.Int, int.MaxValue, true, "exception occured while gathering a user by id.");
             if (table.Rows.Count > 0)
             {
-                string username = table.Rows[0]["Username"] as string;
+                string username = table.Rows[0]["Name"] as string;
                 string email = table.Rows[0]["Email"] as string;
                 string securityQuestion = table.Rows[0]["SecurityQuestion"] as string;
                 int permissions = (int)table.Rows[0]["Permissions"];
-                resultingUser = new User(permissions, username, email, securityQuestion, permissions); //NOTE: We use the username we were given not the one in the database. This prevents the username from being all caps.
+                resultingUser = new User(permissions, username, email, securityQuestion, id);
             }
 
             return resultingUser;
@@ -1161,10 +1166,9 @@ namespace DebateScheduler
 
             if (table.Rows.Count > 0)
             {
-                for (int i = 0; i <= startingIndex - endingIndex; i++)
+                for (int i = 0; i < table.Rows.Count; i++)
                 {
                     DataRow row = table.Rows[i];
-
                     int id = (int)row["Id"];
 
                     int creatorID = (int)row["UserID"];
@@ -1180,7 +1184,10 @@ namespace DebateScheduler
 
                     string data = row["NewsData"] as string;
 
-                    posts.Add(new NewsPost(id, creator, date, title, data));
+                    NewsPost post = new NewsPost(id, creator, date, title, data);
+                    post.LastUpdateDate = updateDate;
+                    posts.Add(post);
+
                 }
             }
 
@@ -1235,8 +1242,8 @@ namespace DebateScheduler
                 string dateString = Help.GetDateString(post.Date);
                 string updateDateString = Help.GetDateString(post.LastUpdateDate);
 
-                string sqlQuery = "INSERT INTO News (UserID, Date, LastUpdateDate, NewsData) VALUES " +
-                        "(@UserID, @Date, @UpdateDate, @Data)";
+                string sqlQuery = "INSERT INTO News (UserID, Date, LastUpdateDate, NewsData, Title) VALUES " +
+                        "(@UserID, @Date, @UpdateDate, @Data, @Title)";
 
                 SqlParameter userID = new SqlParameter("@UserID", SqlDbType.Int);
                 userID.Value = post.Creator.ID;
@@ -1246,9 +1253,11 @@ namespace DebateScheduler
                 updateDate.Value = updateDateString;
                 SqlParameter data = new SqlParameter("@Data", SqlDbType.NVarChar, post.Data.Length);
                 data.Value = post.Data;
+                SqlParameter title = new SqlParameter("@Title", SqlDbType.NVarChar, post.Title.Length);
+                title.Value = post.Title;
 
                 SqlDataReader result = ExecuteSQL(GetConnectionStringUsersTable(), sqlQuery, "exception occured while adding a news post.",
-                    userID, date, updateDate, data);
+                    userID, date, updateDate, data, title);
 
                 if (result != null) //If the result is not null, then the query succeeded and should be logged.
                 {
@@ -1356,6 +1365,33 @@ namespace DebateScheduler
             string assemblyPath = GetAppDataPath();
             fullLogPath = assemblyPath += "\\" + logFolderPath + "\\";
         }
+
+        /// <summary>
+        /// Reads the entire log file from start to finish then returns all of the lines as a seperate string.
+        /// </summary>
+        /// <returns>Returns an array of strings representing each line in the log file, or returns null if there was an error.</returns>
+        public static string[] GetLog(HttpSessionState session)
+        {
+            User user = Help.GetUserSession(session);
+            if (user != null && user.PermissionLevel >= permissionToViewLogs)
+            {
+                try
+                {
+                    if (fullLogPath == string.Empty) //there is no full path, so one must be constructed.
+                    {
+                        CreateLogPath();
+                    }
+
+                    return File.ReadAllLines(fullLogPath + logFileName + logFileType);
+                }
+                catch (Exception e)
+                {
+                    LogException(e, "exception occured while gathering the log."); //An error has occured and should be logged.
+                }
+            }
+            return null;
+        }
+
 
         /// <summary>
         /// Logs a message in the log file.

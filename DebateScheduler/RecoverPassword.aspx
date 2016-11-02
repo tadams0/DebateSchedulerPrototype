@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
-    <link rel ="stylesheet" href ="RecoveryStyle.css" type ="text/css" /> <!--This is the stylesheet for the register page.-->
+    <link rel ="stylesheet" href ="RecoveryStyle.css" type ="text/css" /> <!--This is the stylesheet for the password recovery page.-->
     <div id ="PasswordRecovery">
 
             <asp:Label ID="Label_PasswordRecovery" runat="server" Font-Size="22pt" Text="Password Recovery"></asp:Label>

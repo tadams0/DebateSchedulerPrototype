@@ -8,3 +8,39 @@ Exception with message  "Incorrect syntax near '4'." was found. Additional Info:
 Exception with message  "Incorrect syntax near '4'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 10/30/2016 2:04:09 AM
 Exception with message  "Incorrect syntax near '0'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 10/30/2016 2:04:57 AM
 Exception with message  "Incorrect syntax near '0'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 10/30/2016 2:05:14 AM
+Exception with message  "Could not find file 'C:\Program Files (x86)\IIS Express\logs.txt'." was found. Additional Info: "exception occured while gathering the log." logged at 11/1/2016 11:49:39 AM
+Exception with message  "Could not find file 'C:\Program Files (x86)\IIS Express\logs.txt'." was found. Additional Info: "exception occured while gathering the log." logged at 11/1/2016 11:50:04 AM
+Exception with message  "Could not find file 'C:\Program Files (x86)\IIS Express\logs.txt'." was found. Additional Info: "exception occured while gathering the log." logged at 11/1/2016 11:52:24 AM
+Exception with message  "Could not find file 'C:\Program Files (x86)\IIS Express\logs.txt'." was found. Additional Info: "exception occured while gathering the log." logged at 11/1/2016 11:53:03 AM
+Exception with message  "Could not find file 'C:\Program Files (x86)\IIS Express\logs.txt'." was found. Additional Info: "exception occured while gathering the log." logged at 11/1/2016 11:54:46 AM
+Exception with message  "Could not find file 'C:\Program Files (x86)\IIS Express\logs.txt'." was found. Additional Info: "exception occured while gathering the log." logged at 11/1/2016 11:55:22 AM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a news post." logged at 11/1/2016 1:51:31 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a news post." logged at 11/1/2016 1:52:42 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a news post." logged at 11/1/2016 4:28:20 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a news post." logged at 11/1/2016 4:32:43 PM
+Exception with message  "Cannot insert the value NULL into column 'Title', table 'D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF.dbo.News'; column does not allow nulls. INSERT fails.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a news post." logged at 11/1/2016 4:35:32 PM
+Exception with message  "Must declare the scalar variable "@Title"." was found. Additional Info: "exception occured while adding a news post." logged at 11/1/2016 4:36:52 PM
+Exception with message  "Incorrect syntax near '0'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/1/2016 4:37:45 PM
+Exception with message  "Incorrect syntax near '0'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/1/2016 4:38:43 PM
+Exception with message  "Incorrect syntax near '0'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/1/2016 4:39:50 PM
+Exception with message  "Incorrect syntax near '0'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/1/2016 4:40:34 PM
+Exception with message  "Incorrect syntax near '0'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/1/2016 4:40:53 PM
+Exception with message  "Incorrect syntax near '0'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/1/2016 4:41:13 PM
+Exception with message  "Invalid column name 'RowNum'.
+Invalid column name 'RowNum'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/1/2016 4:47:25 PM
+Exception with message  "Must declare the scalar variable "@num"." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/1/2016 4:56:10 PM
+Exception with message  "Incorrect syntax near '10'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/1/2016 4:57:23 PM
+Exception with message  "Incorrect syntax near the keyword 'WHERE'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/1/2016 5:02:04 PM
+Exception with message  "Incorrect syntax near the keyword 'WHERE'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/1/2016 5:14:04 PM
+Exception with message  "Incorrect syntax near the keyword 'Table'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/1/2016 5:17:34 PM
+Exception with message  "Incorrect syntax near the keyword 'Table'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/1/2016 5:19:50 PM
+Exception with message  "Incorrect syntax near the keyword 'WHERE'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/1/2016 5:20:20 PM
+Exception with message  "Incorrect syntax near '0'.
+Invalid usage of the option NEXT in the FETCH statement." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/1/2016 5:29:44 PM
+Exception with message  "Incorrect syntax near '1'.
+Invalid usage of the option NEXT in the FETCH statement." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/1/2016 5:30:17 PM

@@ -44,7 +44,7 @@ namespace DebateScheduler
         /// <summary>
         /// If true the news post has been updated at some point. If false it has not.
         /// </summary>
-        public bool HasBeenUpdated { get { return Date == LastUpdateDate; } }
+        public bool HasBeenUpdated { get { return Date != LastUpdateDate; } }
 
         /// <summary>
         /// Instantiates a news post object.
@@ -65,14 +65,14 @@ namespace DebateScheduler
 
         public override string ToString()
         {
-            string subData = "";
-            if (Data.Length > 100)
-                subData = Data.Substring(0, 100);
-            else
-                subData = Data;
+            //string subData = "";
+            //if (Data.Length > 100)
+            //    subData = Data.Substring(0, 100);
+            //else
+            //    subData = Data;
 
-            return "{ Date: " + Date.ToString() + " First 100 Data Characters: " + subData.ToString() + "... }";
-
+            //return "{ Date: " + Date.ToString() + " First 100 Data Characters: " + subData.ToString() + "... }";
+            return "{ News Post Created By: " + Creator.Username.ToLowerInvariant() + " on " + Date.ToString() + " }";
         }
 
     }

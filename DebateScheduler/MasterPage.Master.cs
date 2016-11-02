@@ -30,7 +30,9 @@ namespace DebateScheduler
 
         private void CheckPermissions(User user)
         {
-            if (PermissionLevel > 1 && (user == null || user.PermissionLevel <= PermissionLevel))
+            //If the user is not logged in and the permission level of the page is greator than 1...
+            //Or if the user is logged in but their permission level is less than the page's permission level..
+            if ((user == null && PermissionLevel > 1) || (user != null && user.PermissionLevel < PermissionLevel))
             {
                 if (Request.Url.AbsolutePath.ToUpperInvariant() != "/default.aspx".ToUpperInvariant())
                     Response.Redirect("Default.aspx");

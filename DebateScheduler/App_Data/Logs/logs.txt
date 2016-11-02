@@ -23,3 +23,27 @@ Username: admin Message: "admin updated a news post from { News Post Created By:
 Username: admin Message: "admin updated a news post from { News Post Created By: admin on 10/8/2016 12:00:00 AM } to { News Post Created By: admin on 10/8/2016 12:00:00 AM }" Logged at 11/1/2016 9:40:57 PM server time.
 Username: admin Message: "admin added a new news post with parameters { News Post Created By: admin on 11/1/2016 11:05:05 PM }." Logged at 11/1/2016 11:05:05 PM server time.
 Username: admin Message: "admin removed a news post with the data of { This is another test }" Logged at 11/1/2016 11:05:29 PM server time.
+Username: admin Message: "admin added a new news post with parameters { News Post Created By: admin on 11/2/2016 11:22:02 AM }." Logged at 11/2/2016 11:22:02 AM server time.
+Username: admin Message: "admin added a new news post with parameters { News Post Created By: admin on 11/2/2016 11:22:04 AM }." Logged at 11/2/2016 11:22:05 AM server time.
+Username: admin Message: "admin added a new news post with parameters { News Post Created By: admin on 11/2/2016 11:22:06 AM }." Logged at 11/2/2016 11:22:06 AM server time.
+Username: admin Message: "admin added a new news post with parameters { News Post Created By: admin on 11/2/2016 11:22:07 AM }." Logged at 11/2/2016 11:22:07 AM server time.
+Username: admin Message: "admin removed a news post with the data of { test1 }" Logged at 11/2/2016 11:37:40 AM server time.
+Username: admin Message: "admin removed a news post with the data of { test1 }" Logged at 11/2/2016 11:37:47 AM server time.
+Username: admin Message: "admin removed a news post with the data of { test1 }" Logged at 11/2/2016 11:37:53 AM server time.
+Username: admin Message: "admin removed a news post with the data of { test1 }" Logged at 11/2/2016 11:38:01 AM server time.
+Username: admin Message: "admin has cleared the entire debate schedule." Logged at 11/2/2016 3:40:29 PM server time.
+Username: admin Message: "admin has cleared the entire debate schedule." Logged at 11/2/2016 3:45:35 PM server time.
+Username: admin Message: "admin has cleared the entire debate schedule." Logged at 11/2/2016 3:46:13 PM server time.
+Username: Admin Message: "Admin has cleared the entire debate schedule." Logged at 11/2/2016 3:48:08 PM server time.
+Username: Admin Message: "Admin has cleared the entire debate schedule." Logged at 11/2/2016 3:49:15 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: Team1, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/2/2016 3:58:26 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: Team2, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/2/2016 3:58:26 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: Team3, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/2/2016 3:58:26 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: Team4, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/2/2016 3:58:26 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: Team5, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/2/2016 3:58:26 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: Team6, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/2/2016 3:58:26 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: Team7, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/2/2016 3:58:26 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: Team8, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/2/2016 3:58:26 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: Team9, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/2/2016 3:58:26 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: Team10, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/2/2016 3:58:26 PM server time.
+Username: admin Message: "admin has cleared the entire debate schedule." Logged at 11/2/2016 3:58:26 PM server time.

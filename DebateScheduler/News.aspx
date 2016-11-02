@@ -6,6 +6,9 @@
 
     <div id ="NewsArea" runat ="server">
 
+        <br />
+        <br />
+
         <asp:Panel ID="Panel_News" runat="server">
         </asp:Panel>
 

@@ -76,6 +76,8 @@
     <Content Include="App_Data\Database_log.ldf">
       <DependentUpon>Database.mdf</DependentUpon>
     </Content>
+    <Content Include="DebateCreator.aspx" />
+    <Content Include="DebateCreatorStyle.css" />
     <Content Include="Default.aspx" />
     <Content Include="News.aspx" />
     <Content Include="NewsStyle.css" />
@@ -111,6 +113,13 @@
     </Compile>
     <Compile Include="DatabaseHandler.cs" />
     <Compile Include="Debate.cs" />
+    <Compile Include="DebateCreator.aspx.cs">
+      <DependentUpon>DebateCreator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DebateCreator.aspx.designer.cs">
+      <DependentUpon>DebateCreator.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

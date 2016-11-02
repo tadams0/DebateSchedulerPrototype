@@ -12,7 +12,35 @@ namespace DebateScheduler
     /// </summary>
     public static class Help
     {
+        private static readonly int MaximumTeams = 10;
+        private static readonly int MaxTeamNameLength = 50;
+        private static readonly int MinTeamNameLength = 3;
         private static readonly string DateFormat = "O";
+
+        /// <summary>
+        /// Gets an integer that represents the maximum number of teams allowed in the scheduler.
+        /// </summary>
+        /// <returns>Returns an integer value representing the maximum teams allowed.</returns>
+        public static int GetMaximumTeams()
+        {
+            return MaximumTeams;
+        }
+
+        /// <summary>
+        /// Gets an integer that represents the maximum number of characters a team name can contain.
+        /// </summary>
+        public static int GetMaximumTeamNameSize()
+        {
+            return MaxTeamNameLength;
+        }
+
+        /// <summary>
+        /// Gets an integer that represents the minimum number of characters a team name can contain.
+        /// </summary>
+        public static int GetMinimumTeamNameSize()
+        {
+            return MinTeamNameLength;
+        }
 
         /// <summary>
         /// Gets the user object from the current session.
@@ -92,6 +120,7 @@ namespace DebateScheduler
         {
             return DateTime.ParseExact(date, DateFormat, CultureInfo.InvariantCulture);
         }
+
         public static List<DateTime> SatBetween(DateTime StartDate, DateTime EndDate)
         {
             if (StartDate.DayOfWeek != DayOfWeek.Saturday)
@@ -113,10 +142,11 @@ namespace DebateScheduler
             do
             {
                 dateList.Add(StartDate);
-                StartDate.AddDays(7);
+                StartDate = StartDate.AddDays(7);
             } while (StartDate <= EndDate);
             return (dateList);
         }
+
         /// <summary>
         /// creates every match for the season.
         /// </summary>
@@ -135,7 +165,7 @@ namespace DebateScheduler
                 }
             }
 
-            teamPairs = teamPairs.OrderBy(a => a.ID).ToList();
+            teamPairs = teamPairs.OrderBy(a => a.PairID).ToList();
             int currentSaturday = 0;
             for (int i = 0; i < teamPairs.Count / 2; i++)
             {

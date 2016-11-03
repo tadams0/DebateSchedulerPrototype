@@ -1,0 +1,19 @@
+﻿body 
+{
+}
+
+#PasswordRecovery
+{
+    width: 280px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#RecoveryContent
+{
+    padding-top: 100px;
+    padding-bottom: 100px;
+    width: 440px;
+    margin-left:auto;
+    margin-right:auto;
+}

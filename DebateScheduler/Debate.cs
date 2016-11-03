@@ -110,7 +110,7 @@ namespace DebateScheduler
                 morningAddition += "morning";
             else
                 morningAddition += "afternoon";
-            return "{ Team 1 ID: " + team1.ID + ", Team 1 Score: " + team1Score + ", Team 2 ID: " + team2.ID + ", Team 2 Score: " + team2Score + ", On Date: " + date.ToString() + " and " + morningAddition + " }";
+            return "{ " + team1.Name + " versus " + team2.Name + ", Team 1 Score: " + team1Score + ", Team 2 Score: " + team2Score + ", On Date: " + date.ToString() + " and " + morningAddition + " }";
         }
 
     }

@@ -12,7 +12,124 @@ namespace DebateScheduler
     /// </summary>
     public static class Help
     {
+        private static readonly int MaximumTeams = 10;
+        private static readonly int MaxTeamNameLength = 50;
+        private static readonly int MinTeamNameLength = 3;
         private static readonly string DateFormat = "O";
+
+        /// <summary>
+        /// Orders a list of teams by a given variable then returns the resulting list.
+        /// </summary>
+        /// <param name="order">The order to sort by.</param>
+        /// <param name="variable">The variable to sort by.</param>
+        /// <param name="teams">The list of teams.</param>
+        public static List<Team> OrderTeams(OrderBy order, TeamOrderVar variable, List<Team> teams)
+        {
+            switch (variable)
+            {
+                default:
+                    {
+                        int maxLength = teams.Max(o => o.Name.Length);
+                        if (order == OrderBy.Ascending)
+                            return teams.OrderBy(o => o.Name.PadLeft(maxLength, '0')).ToList();
+                        else
+                            return teams.OrderByDescending(o => o.Name.PadLeft(maxLength, '0')).ToList();
+                    }
+                case TeamOrderVar.Wins:
+                    if (order == OrderBy.Ascending)
+                        return teams.OrderBy(o => o.Wins).ToList();
+                    else
+                        return teams.OrderByDescending(o => o.Wins).ToList();
+
+                case TeamOrderVar.Ties:
+                    if (order == OrderBy.Ascending)
+                        return teams.OrderBy(o => o.Ties).ToList();
+                    else
+                        return teams.OrderByDescending(o => o.Ties).ToList();
+
+                case TeamOrderVar.Losses:
+                    if (order == OrderBy.Ascending)
+                        return teams.OrderBy(o => o.Losses).ToList();
+                    else
+                        return teams.OrderByDescending(o => o.Losses).ToList();
+
+                case TeamOrderVar.TotalScore:
+                    if (order == OrderBy.Ascending)
+                        return teams.OrderBy(o => o.TotalScore).ToList();
+                    else
+                        return teams.OrderByDescending(o => o.TotalScore).ToList();
+            }
+            
+
+        }
+
+        /// <summary>
+        /// Gets the current debate season that is ongoing, or returns null if there isn't an ongoing season.
+        /// </summary>
+        /// <param name="application">The application variable, "Application" should nromally do it.</param>
+        /// <returns>Returns null if there is no current debate season or an error occured getting the season from the database., otherwise returns a debate season.</returns>
+        public static DebateSeason GetCurrentDebateSeason(HttpApplicationState application)
+        {
+            int debateID = GetDebateSeasonID(application);
+            if (debateID != -1)
+                return DatabaseHandler.GetDebateSeason(debateID);
+            else
+                return null;
+        }
+
+        /// <summary>
+        /// Gets the debate id currently ongoing in the application.
+        /// </summary>
+        /// <param name="application">The application's state.</param>
+        /// <returns>Returns -1 if no debate is ongoing, otherwise returns an id greator than -1.</returns>
+        public static int GetDebateSeasonID(HttpApplicationState application)
+        {
+            object obj = application.Get("SeasonID");
+            if (obj != null)
+            {
+                return (int)obj;
+            }
+
+            return -1;
+        }
+
+        /// <summary>
+        /// Sets the id of the ongoing debate. Use -1 if there is no ongoing debate.
+        /// </summary>
+        /// <param name="application">The application state.</param>
+        /// <param name="id">The id of the debate currently active.</param>
+        public static void SetDebateID(HttpApplicationState application, int id)
+        {
+            if (application.Get("SeasonID") != null)
+                application.Set("SeasonID", id);
+            else
+                application.Add("SeasonID", id);
+        }
+
+        /// <summary>
+        /// Gets an integer that represents the maximum number of teams allowed in the scheduler.
+        /// </summary>
+        /// <returns>Returns an integer value representing the maximum teams allowed.</returns>
+        public static int GetMaximumTeams()
+        {
+            return MaximumTeams;
+        }
+
+        /// <summary>
+        /// Gets an integer that represents the maximum number of characters a team name can contain.
+        /// </summary>
+        public static int GetMaximumTeamNameSize()
+        {
+            return MaxTeamNameLength;
+        }
+
+        /// <summary>
+        /// Gets an integer that represents the minimum number of characters a team name can contain.
+        /// </summary>
+        public static int GetMinimumTeamNameSize()
+        {
+            return MinTeamNameLength;
+        }
 
         /// <summary>
         /// Gets the user object from the current session.
@@ -119,10 +236,11 @@ namespace DebateScheduler
             do
             {
                 dateList.Add(StartDate);
-                StartDate.AddDays(7);
+                StartDate = StartDate.AddDays(7);
             } while (StartDate <= EndDate);
             return (dateList);
         }
+
         /// <summary>
         /// creates every match for the season.
         /// </summary>

@@ -14,11 +14,21 @@ namespace DebateScheduler
         /// The username of the user.
         /// </summary>
         public string Username { get; private set; }
+
+        /// <summary>
+        /// The email of the user.
+        /// </summary>
+        public string Email { get; set; }
         
+        /// <summary>
+        /// The security question of the user.
+        /// </summary>
+        public string SecurityQuestion { get; set; }
+
         /// <summary>
         /// The permission level of the user.
         /// </summary>
-        public int PermissionLevel { get; private set; }
+        public int PermissionLevel { get; set; }
 
         /// <summary>
         /// The id of the user within the database.
@@ -30,10 +40,14 @@ namespace DebateScheduler
         /// </summary>
         /// <param name="permissionLevel">The level of access the user has.</param>
         /// <param name="username">The username of the user.</param>
-        public User(int permissionLevel, string username, int id)
+        /// <param name="email">The user's email, used to recover the password.</param>
+        /// <param name="securityQuestion">The security question for the user, used when recovering the password.</param>
+        public User(int permissionLevel, string username, string email, string securityQuestion, int id)
         {
             PermissionLevel = permissionLevel;
             Username = username;
+            Email = email;
+            SecurityQuestion = securityQuestion;
             ID = id;
         }
 
@@ -47,6 +61,7 @@ namespace DebateScheduler
             Username = parameters[0];
             PermissionLevel = int.Parse(parameters[1]);
             ID = int.Parse(parameters[2]);
+            Email = parameters[3];
         }
 
         /// <summary>
@@ -54,7 +69,7 @@ namespace DebateScheduler
         /// </summary>
         public override string ToString()
         {
-            return Username + "%" + PermissionLevel + "%" + ID;
+            return Username + "%" + PermissionLevel + "%" + ID + "%" + Email;
         }
     }
 }

@@ -58,7 +58,7 @@ namespace DebateScheduler
         /// <summary>
         /// The unique ID (non-GUID based) which can be matched in the data base.
         /// </summary>
-        public int ID { get { return id; } }
+        public int ID { get { return id; } set { id = value; } }
 
         
         private string name;
@@ -76,6 +76,16 @@ namespace DebateScheduler
             this.losses = losses;
             this.ties = ties;
             this.totalScore = totalScore;
+        }
+
+        public string GetName()
+        {
+            return name;
+        }
+
+        public int GetWins()
+        {
+            return wins;
         }
 
         /// <summary>

@@ -19,7 +19,6 @@
 [Xx]86/
 [Bb]uild/
 bld/
-[Bb]in/
 [Oo]bj/
 
 # Visual Studio 2015 cache/options directory
@@ -241,3 +240,8 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/DebateScheduler/bin/roslyn
+/DebateScheduler/bin/DebateScheduler.dll.config
+/DebateScheduler/bin/DebateScheduler.dll
+/DebateScheduler/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+/DebateScheduler/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll

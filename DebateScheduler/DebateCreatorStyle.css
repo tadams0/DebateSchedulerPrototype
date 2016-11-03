@@ -1,0 +1,23 @@
+﻿
+#MainPanel
+{
+    width: 90vw;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#mainContent_Calendar_Start
+{
+    display:block;
+    width: 500px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#calendars
+{
+    display:block;
+    width: 500px;
+    margin-left:auto;
+    margin-right:auto;
+}

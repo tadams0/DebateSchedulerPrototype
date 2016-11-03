@@ -15,7 +15,7 @@ namespace DebateScheduler
         private static readonly int MaximumTeams = 10;
         private static readonly int MaxTeamNameLength = 50;
         private static readonly int MinTeamNameLength = 3;
-        private static readonly string DateFormat = "O";
+        private static readonly string DateFormat = "MM/dd/yyyy";
 
         /// <summary>
         /// Gets an integer that represents the maximum number of teams allowed in the scheduler.

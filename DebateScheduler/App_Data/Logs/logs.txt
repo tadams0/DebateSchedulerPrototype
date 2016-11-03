@@ -47,3 +47,6 @@ Username: admin Message: "admin added a new team with parameters { Name: Team8, 
 Username: admin Message: "admin added a new team with parameters { Name: Team9, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/2/2016 3:58:26 PM server time.
 Username: admin Message: "admin added a new team with parameters { Name: Team10, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/2/2016 3:58:26 PM server time.
 Username: admin Message: "admin has cleared the entire debate schedule." Logged at 11/2/2016 3:58:26 PM server time.
+Username: ::1 Message: "::1 (IP) added a new user named alex1996." Logged at 11/3/2016 2:13:55 AM server time.
+Username: admin Message: "admin updated a user with the username alex1996" Logged at 11/3/2016 2:14:21 AM server time.
+Username: admin Message: "admin updated a user with the username alex1996" Logged at 11/3/2016 2:14:45 AM server time.

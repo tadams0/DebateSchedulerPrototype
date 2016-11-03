@@ -16,6 +16,64 @@ namespace DebateScheduler
         private static readonly int MaxTeamNameLength = 50;
         private static readonly int MinTeamNameLength = 3;
         private static readonly string DateFormat = "O";
+        public static readonly string scheduleURL = "Schedule.aspx";
+        public static readonly string debateCreatorURL = "DebateCreator.aspx";
+
+
+        /// <summary>
+        /// Orders a list of debates by a given variable in a given order and returns the resulting list.
+        /// </summary>
+        /// <param name="order">The order of the returning list.</param>
+        /// <param name="variable">The variable to order by.</param>
+        /// <param name="debates">The list of debates being ordered.</param>
+        /// <returns>Returns a list of debates properly ordered by the given variables.</returns>
+        public static List<Debate> OrderDebates(OrderBy order, DebateOrderVar variable, List<Debate> debates)
+        {
+
+            switch (variable)
+            {
+                default:
+                    if (order == OrderBy.Ascending)
+                        return debates.OrderBy(o => o.Date).ToList();
+                    else
+                        return debates.OrderByDescending(o => o.Date).ToList();
+
+                case DebateOrderVar.Team1Name:
+                    {
+                        int maxLength = debates.Max(o => o.Team1.Name.Length);
+                        if (order == OrderBy.Ascending)
+                            return debates.OrderBy(o => o.Team1.Name.PadLeft(maxLength, '0')).ToList(); //Not the most effecient way of sorting, but whatever it works.
+                        else
+                            return debates.OrderByDescending(o => o.Team1.Name.PadLeft(maxLength, '0')).ToList(); //Not the most effecient way of sorting, but whatever it works.
+                    }
+                case DebateOrderVar.Team2Name:
+                    {
+                        int maxLength = debates.Max(o => o.Team2.Name.Length);
+                        if (order == OrderBy.Ascending)
+                            return debates.OrderBy(o => o.Team2.Name.PadLeft(maxLength, '0')).ToList(); //Not the most effecient way of sorting, but whatever it works.
+                        else
+                            return debates.OrderByDescending(o => o.Team2.Name.PadLeft(maxLength, '0')).ToList(); //Not the most effecient way of sorting, but whatever it works.
+                    }
+                case DebateOrderVar.Team1Score:
+                    if (order == OrderBy.Ascending)
+                        return debates.OrderBy(o => o.Team1Score).ToList();
+                    else
+                        return debates.OrderByDescending(o => o.Team1Score).ToList();
+
+                case DebateOrderVar.Team2Score:
+                    if (order == OrderBy.Ascending)
+                        return debates.OrderBy(o => o.Team2Score).ToList();
+                    else
+                        return debates.OrderByDescending(o => o.Team2Score).ToList();
+
+                case DebateOrderVar.MorningDebate:
+                    if (order == OrderBy.Ascending)
+                        return debates.OrderBy(o => o.MorningDebate).ToList();
+                    else
+                        return debates.OrderByDescending(o => o.MorningDebate).ToList();
+            }
+
+        }
 
         /// <summary>
         /// Orders a list of teams by a given variable then returns the resulting list.

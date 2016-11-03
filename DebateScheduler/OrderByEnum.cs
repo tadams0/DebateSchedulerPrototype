@@ -26,7 +26,10 @@ namespace DebateScheduler
         Team1Score = 0,
         Team2Score = 1,
         Date = 2,
-        MorningDebate = 3
+        MorningDebate = 3,
+        Team1Name = 4,
+        Team2Name = 5
     }
+
 
 }

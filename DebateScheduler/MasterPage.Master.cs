@@ -21,6 +21,23 @@ namespace DebateScheduler
 
             if (!Page.IsPostBack)
                 CheckPermissions(user);
+            
+            //if (user == null || user.PermissionLevel <= 1)
+            //{
+            //    Menu1.Items.Remove(Menu1.FindItem("Admin"));
+            //    Menu1.Items.Remove(Menu1.FindItem("Referee"));
+            //}
+            //else
+            //{
+            //    if (user.PermissionLevel < 3)
+            //    {
+            //        Menu1.Items.Remove(Menu1.FindItem("Admin"));
+            //    }
+            //    if (user.PermissionLevel < 2)
+            //    {
+            //        Menu1.Items.Remove(Menu1.FindItem("Referee"));
+            //    }
+            //}
         }
 
         public void SetPagePermissionLevel(int permissionLevel)
@@ -28,8 +45,62 @@ namespace DebateScheduler
             PermissionLevel = permissionLevel;
         }
 
+        private MenuItem MakeAdminButton()
+        {
+            MenuItem but = new MenuItem();
+            but.NavigateUrl = "~/AdminPanel.aspx";
+            but.Text = "Admin Panel";
+            but.Value = "A";
+            return but;
+        }
+
+        private MenuItem MakeDebateCreatorButton()
+        {
+            MenuItem but = new MenuItem();
+            but.NavigateUrl = "~/DebateCreator.aspx";
+            but.Text = "Create Debate Season";
+            but.Value = "D";
+            return but;
+        }
+
+        private MenuItem MakeRefereeButton()
+        {
+            MenuItem but = new MenuItem();
+            but.NavigateUrl = "~/RefereeView.aspx";
+            but.Text = "Referee";
+            but.Value = "R";
+            return but;
+        }
+
+        public void RemoveButton(string val)
+        {
+            MenuItem adminBut = Menu1.FindItem(val);
+            if (adminBut != null)
+            {
+                Menu1.Items.Remove(adminBut);
+            }
+        }
+
         private void CheckPermissions(User user)
         {
+            RemoveButton("A"); //While this is not effecient, it works.
+            RemoveButton("D");
+            RemoveButton("R");
+
+            if (user != null)
+            {
+                if (user.PermissionLevel >= 2)
+                {
+                    Menu1.Items.Add(MakeRefereeButton());
+                }
+
+                if (user.PermissionLevel >= 3)
+                {
+                    Menu1.Items.Add(MakeDebateCreatorButton());
+                    Menu1.Items.Add(MakeAdminButton());
+                }
+            }
+
             //If the user is not logged in and the permission level of the page is greator than 1...
             //Or if the user is logged in but their permission level is less than the page's permission level..
             if ((user == null && PermissionLevel > 1) || (user != null && user.PermissionLevel < PermissionLevel))
@@ -47,6 +118,8 @@ namespace DebateScheduler
                 Help.AddUserSession(Session, newUser);
                 
                 FillLogout();
+
+                CheckPermissions(newUser);
             }
             else
             {

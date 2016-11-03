@@ -226,7 +226,7 @@ namespace DebateScheduler
 
                 Help.SetDebateID(Application, seasonID);
 
-                Response.Redirect("Default.aspx");
+                Response.Redirect(Help.scheduleURL);
             }
 
 

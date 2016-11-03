@@ -14,41 +14,49 @@ namespace DebateScheduler
     {
 
         private const int nameCellWidth = 250;
-        private const int statsCellWidth = 90;
+        private const int statsCellWidth = 80;
+        private const int dateCellWidth = 150;
+        private const int vsCellWidth = 30;
+
+        private bool includeVs = true;
 
         private readonly Color headerTableColor = Color.CornflowerBlue;
+        private readonly Color headerTableTextColor = Color.White;
 
         private OrderBy order = OrderBy.Ascending;
-        private TeamOrderVar teamOrder = TeamOrderVar.Name;
+        private DebateOrderVar dOrder = DebateOrderVar.Date;
+
+        private List<Debate> debates = new List<Debate>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             //Gathering query values
             NameValueCollection queryValues = HttpUtility.ParseQueryString(Request.QueryString.ToString());
             string orderString = queryValues.Get("Order");
-            string teamOrderString = queryValues.Get("TeamOrder");
+            string debateOrderString = queryValues.Get("dOrder");
 
             if (orderString != null)
             {
                 order = (OrderBy)(int.Parse(orderString));
             }
-            if (teamOrderString != null)
+            if (debateOrderString != null)
             {
-                teamOrder = (TeamOrderVar)(int.Parse(teamOrderString));
+                dOrder = (DebateOrderVar)(int.Parse(debateOrderString));
             }
 
             int currentDebateID = Help.GetDebateSeasonID(Application);
-            List<Team> teams = DatabaseHandler.GetDebateSeasonTeams(currentDebateID);
+            debates = DatabaseHandler.GetDebateSeasonDebates(currentDebateID);
 
-            teams = Help.OrderTeams(order, teamOrder, teams);
+            debates = Help.OrderDebates(order, dOrder, debates);
 
             TableRow header = CreateHeaderRow();
             Table1.Rows.Add(header);
 
-            foreach (Team t in teams)
+            foreach (Debate d in debates)
             {
-                TableRow teamRow = CreateTeamRow(t);
-                Table1.Rows.Add(teamRow);
+                TableRow debateRow = CreateDebateRow(d);
+                Table1.Rows.Add(debateRow);
+
             }
 
 
@@ -58,126 +66,187 @@ namespace DebateScheduler
         {
             TableRow row = new TableRow();
 
-            TableCell nameCell = new TableCell();
-            TableCell winCell = new TableCell();
-            TableCell lossCell = new TableCell();
-            TableCell tieCell = new TableCell();
-            TableCell totalScore = new TableCell();
+            TableCell team1Cell = new TableCell();
+            TableCell team2Cell = new TableCell();
+            TableCell team1ScoreCell = new TableCell();
+            TableCell team2ScoreCell = new TableCell();
+            TableCell dateCell = new TableCell();
+            TableCell morningCell = new TableCell();
+            TableCell vsCell = new TableCell();
+            
+            team1Cell.BackColor = headerTableColor;
+            team1Cell.Width = nameCellWidth;
+            team1Cell.HorizontalAlign = HorizontalAlign.Center;
 
-            nameCell.BackColor = headerTableColor;
-            winCell.BackColor = headerTableColor;
-            lossCell.BackColor = headerTableColor;
-            tieCell.BackColor = headerTableColor;
-            totalScore.BackColor = headerTableColor;
+            team2Cell.BackColor = headerTableColor;
+            team2Cell.Width = nameCellWidth;
+            team2Cell.HorizontalAlign = HorizontalAlign.Center;
 
-            LinkButton nameButton = new LinkButton();
-            nameButton.Command += NameButton_Command;
-            nameButton.Text = "Name";
+            team1ScoreCell.BackColor = headerTableColor;
+            team1ScoreCell.Width = statsCellWidth;
 
-            LinkButton winButton = new LinkButton();
-            winButton.Command += WinButton_Command;
-            winButton.Text = "Wins";
+            team2ScoreCell.BackColor = headerTableColor;
+            team2ScoreCell.Width = statsCellWidth;
 
-            LinkButton lossButton = new LinkButton();
-            lossButton.Command += LossButton_Command;
-            lossButton.Text = "Losses";
+            dateCell.BackColor = headerTableColor;
+            dateCell.Width = dateCellWidth;
 
-            LinkButton tieButton = new LinkButton();
-            tieButton.Command += TieButton_Command;
-            tieButton.Text = "Ties";
+            morningCell.BackColor = headerTableColor;
+            morningCell.Width = dateCellWidth;
 
-            LinkButton totalScoreButton = new LinkButton();
-            totalScoreButton.Command += TotalScoreButton_Command;
-            totalScoreButton.Text = "Total Score";
+            vsCell.BackColor = headerTableColor;
+            vsCell.Width = vsCellWidth;
+            vsCell.HorizontalAlign = HorizontalAlign.Center;
 
-            nameCell.Controls.Add(nameButton);
-            winCell.Controls.Add(winButton);
-            lossCell.Controls.Add(lossButton);
-            tieCell.Controls.Add(tieButton);
-            totalScore.Controls.Add(totalScoreButton);
+            LinkButton team1Button = new LinkButton();
+            team1Button.Command += Team1Button_Command;
+            team1Button.ForeColor = headerTableTextColor;
+            team1Button.Text = "Team 1";
 
-            row.Cells.Add(nameCell);
-            row.Cells.Add(winCell);
-            row.Cells.Add(lossCell);
-            row.Cells.Add(tieCell);
-            row.Cells.Add(totalScore);
+            LinkButton team2Button = new LinkButton();
+            team2Button.Command += Team2Button_Command;
+            team2Button.ForeColor = headerTableTextColor;
+            team2Button.Text = "Team 2";
+
+            LinkButton team1ScoreButton = new LinkButton();
+            team1ScoreButton.Command += Team1ScoreButton_Command;
+            team1ScoreButton.ForeColor = headerTableTextColor;
+            team1ScoreButton.Text = "Team 1 Score";
+
+            LinkButton team2ScoreButton = new LinkButton();
+            team2ScoreButton.Command += Team2ScoreButton_Command;
+            team2ScoreButton.ForeColor = headerTableTextColor;
+            team2ScoreButton.Text = "Team 2 Score";
+
+            LinkButton dateButton = new LinkButton();
+            dateButton.Command += DateButton_Command;
+            dateButton.ForeColor = headerTableTextColor;
+            dateButton.Text = "Date";
+
+            LinkButton morningButton = new LinkButton();
+            morningButton.Command += MorningButton_Command;
+            morningButton.ForeColor = headerTableTextColor;
+            morningButton.Text = "Time";
+
+            vsCell.ForeColor = headerTableColor;
+            vsCell.Text = "Versus";
+
+            team1Cell.Controls.Add(team1Button);
+            team2Cell.Controls.Add(team2Button);
+            team1ScoreCell.Controls.Add(team1ScoreButton);
+            team2ScoreCell.Controls.Add(team2ScoreButton);
+            dateCell.Controls.Add(dateButton);
+            morningCell.Controls.Add(morningButton);
+
+            row.Cells.Add(team1Cell);
+            if (includeVs)
+                row.Cells.Add(vsCell);
+            row.Cells.Add(team2Cell);
+            row.Cells.Add(team1ScoreCell);
+            row.Cells.Add(team2ScoreCell);
+            row.Cells.Add(dateCell);
+            row.Cells.Add(morningCell);
+            
+            return row;
+        }
+
+        private TableRow CreateDebateRow(Debate d)
+        {
+            TableRow row = new TableRow();
+
+            TableCell team1Cell = new TableCell();
+            TableCell team2Cell = new TableCell();
+            TableCell team1ScoreCell = new TableCell();
+            TableCell team2ScoreCell = new TableCell();
+            TableCell dateCell = new TableCell();
+            TableCell morningCell = new TableCell();
+            TableCell vsCell = new TableCell();
+
+            team1Cell.Width = nameCellWidth;
+            team1Cell.HorizontalAlign = HorizontalAlign.Center;
+            team2Cell.Width = nameCellWidth;
+            team2Cell.HorizontalAlign = HorizontalAlign.Center;
+            team1ScoreCell.Width = statsCellWidth;
+            team2ScoreCell.Width = statsCellWidth;
+            dateCell.Width = dateCellWidth;
+            morningCell.Width = dateCellWidth;
+            vsCell.Width = vsCellWidth;
+            vsCell.HorizontalAlign = HorizontalAlign.Center;
+
+            team1Cell.Text = d.Team1.Name;
+            team2Cell.Text = d.Team2.Name;
+            team1ScoreCell.Text = d.Team1Score.ToString();
+            team2ScoreCell.Text = d.Team2Score.ToString();
+            dateCell.Text = d.Date.ToString("MM/dd/yy");
+
+            vsCell.Text = "vs";
+
+            if (d.MorningDebate)
+                morningCell.Text = "Morning";
+            else
+                morningCell.Text = "Afternoon";
+
+            row.Cells.Add(team1Cell);
+            if (includeVs)
+                row.Cells.Add(vsCell);
+            row.Cells.Add(team2Cell);
+            row.Cells.Add(team1ScoreCell);
+            row.Cells.Add(team2ScoreCell);
+            row.Cells.Add(dateCell);
+            row.Cells.Add(morningCell);
+            
 
             return row;
         }
 
-        private void TotalScoreButton_Command(object sender, CommandEventArgs e)
+        private void MorningButton_Command(object sender, CommandEventArgs e)
         {
-            RedirectWithParameters(TeamOrderVar.TotalScore);
+            RedirectWithParameters(DebateOrderVar.MorningDebate);
         }
 
-        private void TieButton_Command(object sender, CommandEventArgs e)
+        private void DateButton_Command(object sender, CommandEventArgs e)
         {
-            RedirectWithParameters(TeamOrderVar.Ties);
+            RedirectWithParameters(DebateOrderVar.Date);
         }
 
-        private void LossButton_Command(object sender, CommandEventArgs e)
+        private void Team2ScoreButton_Command(object sender, CommandEventArgs e)
         {
-            RedirectWithParameters(TeamOrderVar.Losses);
+            RedirectWithParameters(DebateOrderVar.Team2Score);
         }
 
-        private void WinButton_Command(object sender, CommandEventArgs e)
+        private void Team1ScoreButton_Command(object sender, CommandEventArgs e)
         {
-            RedirectWithParameters(TeamOrderVar.Wins);
+            RedirectWithParameters(DebateOrderVar.Team1Score);
         }
 
-        private void NameButton_Command(object sender, CommandEventArgs e)
+        private void Team2Button_Command(object sender, CommandEventArgs e)
         {
-            RedirectWithParameters(TeamOrderVar.Name);
+            RedirectWithParameters(DebateOrderVar.Team2Name);
         }
 
-        private void RedirectWithParameters(TeamOrderVar teamOrderVar)
+        private void Team1Button_Command(object sender, CommandEventArgs e)
+        {
+            RedirectWithParameters(DebateOrderVar.Team1Name);
+        }
+
+        private void RedirectWithParameters(DebateOrderVar debateOrderVar)
         {
             NameValueCollection queryValues = HttpUtility.ParseQueryString(Request.QueryString.ToString());
-            if (teamOrder == teamOrderVar && order != OrderBy.Descending) //If team order is already by name, then we flip them.
+            if (dOrder == debateOrderVar && order != OrderBy.Descending) //If team order is already by name, then we flip them.
             {
-                queryValues.Set("OrderTeams", ((int)teamOrderVar).ToString());
+                queryValues.Set("dOrder", ((int)debateOrderVar).ToString());
                 queryValues.Set("Order", ((int)OrderBy.Descending).ToString());
             }
             else
             {
-                queryValues.Set("OrderTeams", ((int)teamOrderVar).ToString());
+                queryValues.Set("dOrder", ((int)debateOrderVar).ToString());
                 queryValues.Set("Order", ((int)OrderBy.Ascending).ToString());
             }
 
             string url = Request.Url.AbsolutePath;
             Response.Redirect(url + "?" + queryValues);
         }
-
-        private TableRow CreateTeamRow(Team t)
-        {
-            TableRow row = new TableRow();
-
-            TableCell nameCell = new TableCell();
-            TableCell winCell = new TableCell();
-            TableCell lossCell = new TableCell();
-            TableCell tieCell = new TableCell();
-            TableCell totalScore = new TableCell();
-
-            nameCell.Width = nameCellWidth;
-            winCell.Width = statsCellWidth;
-            lossCell.Width = statsCellWidth;
-            tieCell.Width = statsCellWidth;
-            totalScore.Width = statsCellWidth;
-
-            nameCell.Text = t.Name;
-            winCell.Text = t.Wins.ToString();
-            lossCell.Text = t.Losses.ToString();
-            tieCell.Text = t.Ties.ToString();
-            totalScore.Text = t.TotalScore.ToString();
-
-            row.Cells.Add(nameCell);
-            row.Cells.Add(winCell);
-            row.Cells.Add(lossCell);
-            row.Cells.Add(tieCell);
-            row.Cells.Add(totalScore);
-
-            return row;
-        }
         
+
     }
 }

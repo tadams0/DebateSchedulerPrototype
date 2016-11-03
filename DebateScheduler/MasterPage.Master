@@ -49,8 +49,6 @@
                             <asp:MenuItem Text="Rankings" Value="Rankings" NavigateUrl="~/Rankings.aspx"></asp:MenuItem>
                             <asp:MenuItem Text="About Us" Value="About Us" NavigateUrl="~/AboutUs.aspx"></asp:MenuItem>
                             <asp:MenuItem Text="Contact Us" Value="Contact Us"></asp:MenuItem>
-                            <asp:MenuItem NavigateUrl="~/RefereeView.aspx" Text="Referee" Value="Refere"></asp:MenuItem>
-                            <asp:MenuItem NavigateUrl="~/AdminPanel.aspx" Text="Admin" Value="Admin"></asp:MenuItem>
                         </Items>
                         <StaticHoverStyle BackColor="#FF6600" ForeColor="White" BorderColor="White" BorderStyle="Solid" BorderWidth="1px" />
                         <StaticMenuItemStyle BackColor="CornflowerBlue" ForeColor="Black" HorizontalPadding="30px" />

@@ -1507,6 +1507,46 @@ namespace DebateScheduler
         }
 
         /// <summary>
+        /// Gets the ID of the most recent debate season in the database.
+        /// </summary>
+        /// <returns>Returns the id of the most recent debate season added in the database.</returns>
+        public static int GetMostRecentSeasonID()
+        {
+            int id = -1;
+
+            DataTable table = GetLatestRecord(GetConnectionStringUsersTable(), "Seasons", "exception occured while gathering a debate season.");
+
+            if (table.Rows.Count > 0)
+            {
+                id = (int)table.Rows[0]["Id"];
+            }
+
+            return id;
+        }
+
+        /// <summary>
+        /// Gets the ID of the most recent debate season in the database.
+        /// </summary>
+        /// <param name="active">If true the season is still active, if false then the season has ended.</param>
+        /// <returns>Returns the id of the most recent debate season added in the database.</returns>
+        public static int GetMostRecentSeasonID(out bool active)
+        {
+            int id = -1;
+            active = false;
+
+            DataTable table = GetLatestRecord(GetConnectionStringUsersTable(), "Seasons", "exception occured while gathering a debate season.");
+
+            if (table.Rows.Count > 0)
+            {
+                id = (int)table.Rows[0]["Id"];
+
+                active = !Convert.ToBoolean(table.Rows[0]["HasEnded"]);
+            }
+
+            return id;
+        }
+
+        /// <summary>
         /// Gets the list of teams in a given debate season.
         /// </summary>
         /// <param name="id">The id of the debate season.</param>

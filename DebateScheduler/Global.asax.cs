@@ -11,9 +11,10 @@ namespace DebateScheduler
     {
         protected void Application_Start(object sender, EventArgs e)
         {
-            DebateSeason mostRecentSeason = DatabaseHandler.GetMostRecentSeason();
-            if (!mostRecentSeason.HasEnded)
-                Help.SetDebateID(Application, mostRecentSeason.ID);
+            bool activeSeason = false;
+            int mostRecentSeasonID = DatabaseHandler.GetMostRecentSeasonID(out activeSeason);
+            if (activeSeason)
+                Help.SetDebateID(Application, mostRecentSeasonID);
 
         }
     }

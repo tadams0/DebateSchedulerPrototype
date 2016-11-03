@@ -79,6 +79,7 @@
     <Content Include="DebateCreator.aspx" />
     <Content Include="DebateCreatorStyle.css" />
     <Content Include="Default.aspx" />
+    <Content Include="DefaultStyle.css" />
     <Content Include="News.aspx" />
     <Content Include="NewsStyle.css" />
     <Content Include="packages.config" />
@@ -120,6 +121,7 @@
     <Compile Include="DebateCreator.aspx.designer.cs">
       <DependentUpon>DebateCreator.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DebateSeason.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

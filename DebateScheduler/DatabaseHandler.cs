@@ -54,13 +54,17 @@ namespace DebateScheduler
         private static int permissionToAddDebates = 3;
         private static int permissionToUpdateDebates = 3;
         private static int permissionToRemoveDebates = 3;
-        private static int permissionToClearDebates = 3;
+        private static int permissionToClearDebates = 4;
 
         private static int permissionToAddNews = 3;
         private static int permissionToUpdateNews = 3;
         private static int permissionToRemoveNews = 3;
 
         private static int permissionToViewLogs = 3;
+
+        private static int permissionToAddSeasons = 3;
+        private static int permissionToUpdateSeasons = 3;
+        private static int permissionToRemoveSeasons = 4; //debate seasons cannot be removed.
 
         
         /// <summary>
@@ -835,6 +839,43 @@ namespace DebateScheduler
         }
 
         /// <summary>
+        /// Adds the given team to the database.
+        /// </summary>
+        /// <param name="session">The session of the user who is adding the team.</param>
+        /// <param name="newTeam">The new team that is being added. ID is ignored.</param>
+        /// <param name="id">The id given to the team. This will be -1 if there was an error or no id was assigned.</param>
+        /// <returns>Returns true if the team was successfully added to the database, false if it was not added.</returns>
+        public static bool AddTeam(HttpSessionState session, Team newTeam, out int id)
+        {
+            id = -1;
+            User currentSessionUser = Help.GetUserSession(session); //Get the current user who is running this code.
+
+            if (currentSessionUser != null && currentSessionUser.PermissionLevel >= permissionToAddTeams && newTeam != null) //If the given team is not null and proper permissions are matched.
+            {
+                Team matchedTeam = GetTeam(newTeam.Name);
+
+                if (matchedTeam == null) //If there is no team that matches names.
+                {
+                    string sqlQuery = "INSERT INTO Teams (Name, Wins, Losses, Ties, TotalScore) " + //Id, 
+                        "OUTPUT INSERTED.Id " +
+                        "VALUES(@TeamName, '" + newTeam.Wins + "', '" + newTeam.Losses + "', '" + newTeam.Ties + "', '" + newTeam.TotalScore + "')"; //'" + newUser.ID + "', 
+                    SqlParameter teamName = new SqlParameter("@TeamName", SqlDbType.NChar, newTeam.Name.Length);
+                    teamName.Value = newTeam.Name;
+
+                    object result = ExecuteSQLScaler(GetConnectionStringUsersTable(), sqlQuery, "exception occured while adding a team.", teamName);
+                    if (result != null) //If the result is not null, then the query succeeded and should be logged.
+                    {
+                        id = (int)result;
+                        Log(currentSessionUser.Username, currentSessionUser.Username + " added a new team with parameters " + newTeam.ToString() + ".");
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Updates the team with a matching id as the given team, and replaces all data of the database copy with the given copy.
         /// </summary>
         /// <param name="session">The session that is updating the team.</param>
@@ -1030,6 +1071,42 @@ namespace DebateScheduler
                 SqlDataReader result = ExecuteSQL(GetConnectionStringUsersTable(), sqlQuery, "exception occured while adding a debate.");
                 if (result != null) //If the result is not null, then the query succeeded and should be logged.
                 {
+                    Log(currentSessionUser.Username, currentSessionUser.Username + " added a new debate with parameters " + newDebate.ToString() + ".");
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Adds a new debate to the database.
+        /// </summary>
+        /// <param name="session">The session that is adding the debate.</param>
+        /// <param name="newDebate">The new debate that is being added.</param>
+        /// <param name="id">The id of the inserted debate. This will be -1 if no id was set or there was an error.</param>
+        /// <returns>Returns true if the debate was successfully added, false if it was not added.</returns>
+        public static bool AddDebate(HttpSessionState session, Debate newDebate, out int id)
+        {
+            id = -1;
+            User currentSessionUser = Help.GetUserSession(session); //Get the current user who is running this code.
+
+            if (currentSessionUser != null && currentSessionUser.PermissionLevel >= permissionToAddDebates && newDebate != null) //If the given debate is not null and proper permissions are matched.
+            {
+                string dateString = Help.GetDateString(newDebate.Date);
+
+                int bitValue = 0;
+                if (newDebate.MorningDebate)
+                    bitValue = 1;
+
+                string sqlQuery = "INSERT INTO Debates (TID1, TID2, T1Score, T2Score, Date, MorningDebate)" +
+                    " OUTPUT INSERTED.Id " +
+                        "VALUES ('" + newDebate.Team1.ID + "', '" + newDebate.Team2.ID + "', '" + newDebate.Team1Score + "', '" + newDebate.Team2Score + "', '" + dateString + "', '" + bitValue + "')";
+
+                object result = ExecuteSQLScaler(GetConnectionStringUsersTable(), sqlQuery, "exception occured while adding a debate.");
+                if (result != null) //If the result is not null, then the query succeeded and should be logged.
+                {
+                    id = (int)result;
                     Log(currentSessionUser.Username, currentSessionUser.Username + " added a new debate with parameters " + newDebate.ToString() + ".");
                     return true;
                 }
@@ -1348,6 +1425,194 @@ namespace DebateScheduler
         }
 
         /// <summary>
+        /// Gets a debate season by id.
+        /// </summary>
+        /// <param name="id">The id of the debate season.</param>
+        /// <returns>Returns a debate season populated with the debates and teams associated with it.</returns>
+        public static DebateSeason GetDebateSeason(int id)
+        {
+            DebateSeason resultingSeason = null;
+            DataTable table = GetDataTable(GetConnectionStringUsersTable(), "Seasons", "Id", id.ToString(), SqlDbType.Int, int.MaxValue, true, "exception occured while gathering a debate season.");
+
+            if (table.Rows.Count > 0)
+            {
+                string debateString = table.Rows[0]["Debates"] as string;
+                List<int> debateIDs = DebateSeason.ParseDebateString(debateString);
+
+                string teamsString = table.Rows[0]["Teams"] as string;
+                List<int> teamIDs = DebateSeason.ParseTeamString(teamsString);
+
+                //Loading in the teams
+                List<Team> teams = new List<Team>();
+                foreach (int i in teamIDs)
+                {
+                    teams.Add(GetTeam(i));
+                }
+
+                //Loading in the debates
+                List<Debate> debates = new List<Debate>();
+                foreach (int i in debateIDs)
+                {
+                    debates.Add(GetDebate(i));
+                }
+
+                resultingSeason = new DebateSeason(id, teams, debates);
+            }
+
+            return resultingSeason;
+        }
+
+        /// <summary>
+        /// Adds a debate season to the database.
+        /// </summary>
+        /// <param name="session">The session that is adding the debate season.</param>
+        /// <param name="season">The debate season being added.</param>
+        /// <returns>Returns true if the debate season was added to the database, false otherwise.</returns>
+        public static bool AddDebateSeason(HttpSessionState session, DebateSeason season)
+        {
+            User currentSessionUser = Help.GetUserSession(session); //Get the current user who is running this code.
+
+            if (currentSessionUser != null && currentSessionUser.PermissionLevel >= permissionToAddSeasons && season != null) //If the given season is not null and proper permissions are matched.
+            {
+                string sqlQuery = "INSERT INTO Seasons (Debates, Teams) VALUES " +
+                        "(@Debates, @Teams)";
+
+                string debateString = season.GetDebateString();
+                string teamString = season.GetTeamString();
+
+                SqlParameter debates = new SqlParameter("@Debates", SqlDbType.NVarChar, debateString.Length);
+                debates.Value = debateString;
+                SqlParameter teams = new SqlParameter("@Teams", SqlDbType.NVarChar, teamString.Length);
+                teams.Value = teamString;
+
+                SqlDataReader result = ExecuteSQL(GetConnectionStringUsersTable(), sqlQuery, "exception occured while adding a new debate season.",
+                    debates,teams);
+
+                if (result != null) //If the result is not null, then the query succeeded and should be logged.
+                {
+                    Log(currentSessionUser.Username, currentSessionUser.Username + " added a new debate season with the id " + season.ToString() + ".");
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Adds a debate season to the database.
+        /// </summary>
+        /// <param name="session">The session that is adding the debate season.</param>
+        /// <param name="season">The debate season being added.</param>
+        /// <param name="id">The id assigned to the debate season when it was added to the database.</param>
+        /// <returns>Returns true if the debate season was added to the database, false otherwise.</returns>
+        public static bool AddDebateSeason(HttpSessionState session, DebateSeason season, out int id)
+        {
+            id = -1;
+            User currentSessionUser = Help.GetUserSession(session); //Get the current user who is running this code.
+
+            if (currentSessionUser != null && currentSessionUser.PermissionLevel >= permissionToAddSeasons && season != null) //If the given season is not null and proper permissions are matched.
+            {
+                string sqlQuery = "INSERT INTO Seasons (Debates, Teams) " +
+                    "OUTPUT INSERTED.Id "+ 
+                        "VALUES(@Debates, @Teams)";
+
+                string debateString = season.GetDebateString();
+                string teamString = season.GetTeamString();
+
+                SqlParameter debates = new SqlParameter("@Debates", SqlDbType.NVarChar, debateString.Length);
+                debates.Value = debateString;
+                SqlParameter teams = new SqlParameter("@Teams", SqlDbType.NVarChar, teamString.Length);
+                teams.Value = teamString;
+
+                object result = ExecuteSQLScaler(GetConnectionStringUsersTable(), sqlQuery, "exception occured while adding a new debate season.",
+                    debates, teams);
+
+                if (result != null) //If the result is not null, then the query succeeded and should be logged.
+                {
+                    id = (int)result;
+                    Log(currentSessionUser.Username, currentSessionUser.Username + " added a new debate season with the id " + season.ToString() + ".");
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Updates a debate season with the new data.
+        /// </summary>
+        /// <param name="session">The session that is updating the debate season.</param>
+        /// <param name="season">The debate season data that has changed and will overwrite the existing data.</param>
+        /// <returns>Returns true if the debate season was updated, false otherwise.</returns>
+        public static bool UpdateDebateSeason(HttpSessionState session, DebateSeason season)
+        {
+            User updatingUser = Help.GetUserSession(session);
+            if (updatingUser != null && updatingUser.PermissionLevel >= permissionToUpdateSeasons) //If the user's permission level is high enough
+            {
+                DebateSeason currentSeason = GetDebateSeason(season.ID);
+                if (currentSeason != null) //We ensure that the data exists, otherwise we cannot update something that doesn't exist.
+                {
+                    string sqlQuery = "UPDATE Seasons SET " +
+                                "Debates = @Debates, Teams = @Teams" +
+                                " WHERE Id = " + season.ID;
+                    
+                    //Generating the parameters, this is done for sanitization reasons.
+                    string debateString = season.GetDebateString();
+                    SqlParameter debateData = new SqlParameter("@Debates", SqlDbType.NVarChar, debateString.Length);
+                    debateData.Value = debateString;
+
+                    string teamString = season.GetTeamString();
+                    SqlParameter teamData = new SqlParameter("@Teams", SqlDbType.NVarChar, teamString.Length);
+                    teamData.Value = teamString;
+
+                    SqlDataReader result = ExecuteSQL(GetConnectionStringUsersTable(), sqlQuery, "exception occured while updating a debate season.",
+                        debateData, teamData);
+
+                    if (result != null)
+                    {
+                        Log(updatingUser.Username,
+                            updatingUser.Username + " updated tbe debate season with the id " + season.ToString());
+
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Removes a debate season that matches with the given id.
+        /// </summary>
+        /// <param name="session">The session removing the debate season.</param>
+        /// <param name="id">the id of the debate season to remove.</param>
+        /// <returns>Returns true if the debate season was successfully removed, false otherwise.</returns>
+        public static bool RemoveDebateSeason(HttpSessionState session, int id)
+        {
+            User currentSessionUser = Help.GetUserSession(session); //Get the current user who is running this code.
+            if (currentSessionUser != null && currentSessionUser.PermissionLevel >= permissionToRemoveSeasons) //If the user exists and their permission level is suffecient.
+            {
+                DebateSeason currentSeason = GetDebateSeason(id);
+                if (currentSeason != null) //We ensure that the debate exists.
+                {
+                    string sqlQuery = "DELETE FROM Seasons WHERE Id = @Value";
+                    SqlParameter parameter = new SqlParameter("@Value", SqlDbType.Int);
+                    parameter.Value = id;
+
+                    SqlDataReader result = ExecuteSQL(GetConnectionStringUsersTable(), sqlQuery, "exception occured while removing a debate season.", parameter);
+
+                    if (result != null) //If the result is not null, then the query succeeded and should be logged.
+                    {
+                        Log(currentSessionUser, currentSessionUser.Username + " removed a debate season with id of " + currentSeason.ToString());
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Gets the path to the App_Data folder which contains data for the application.
         /// </summary>
         /// <returns></returns>
@@ -1420,7 +1685,6 @@ namespace DebateScheduler
             {
                 LogException(e, "exception occured while logging."); //An error has occured and should be logged.
             }
-
         }
 
         /// <summary>
@@ -1459,7 +1723,6 @@ namespace DebateScheduler
             {
                 //Well an exception occured, but it cannot be logged since this is the method for logging it. In this case we do nothing really.
             }
-
         }
         
 

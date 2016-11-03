@@ -18,6 +18,35 @@ namespace DebateScheduler
         private static readonly string DateFormat = "O";
 
         /// <summary>
+        /// Gets the debate id currently ongoing in the application.
+        /// </summary>
+        /// <param name="application">The application's state.</param>
+        /// <returns>Returns -1 if no debate is ongoing, otherwise returns an id greator than -1.</returns>
+        public static int GetDebateID(HttpApplicationState application)
+        {
+            object obj = application.Get("SeasonID");
+            if (obj != null)
+            {
+                return (int)obj;
+            }
+
+            return -1;
+        }
+
+        /// <summary>
+        /// Sets the id of the ongoing debate. Use -1 if there is no ongoing debate.
+        /// </summary>
+        /// <param name="application">The application state.</param>
+        /// <param name="id">The id of the debate currently active.</param>
+        public static void SetDebateID(HttpApplicationState application, int id)
+        {
+            if (application.Get("SeasonID") != null)
+                application.Set("SeasonID", id);
+            else
+                application.Add("SeasonID", id);
+        }
+
+        /// <summary>
         /// Gets an integer that represents the maximum number of teams allowed in the scheduler.
         /// </summary>
         /// <returns>Returns an integer value representing the maximum teams allowed.</returns>

@@ -227,3 +227,150 @@ Exception with message  "The INSERT statement conflicted with the FOREIGN KEY co
 The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 3:58:28 PM
 Exception with message  "String or binary data would be truncated.
 The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 3:58:28 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:40 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:40 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:40 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:40 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:40 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:40 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:40 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:40 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:40 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:40 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:40 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:40 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:41 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:42 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:42 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:42 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:42 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:42 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:53:42 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:57:16 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:57:16 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:57:16 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:57:16 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:57:16 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:57:16 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:57:16 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:57:16 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:57:16 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:57:16 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 5:59:21 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 6:07:56 PM
+Exception with message  "Specified cast is not valid." was found. Additional Info: "exception occured while getting the latest season id." logged at 11/2/2016 6:07:59 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 6:08:09 PM
+Exception with message  "Specified cast is not valid." was found. Additional Info: "exception occured while getting the latest season id." logged at 11/2/2016 6:08:48 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 6:08:50 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 6:10:56 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 6:12:29 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 6:12:29 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 6:12:29 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 6:14:39 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 6:17:52 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 6:18:01 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 6:22:59 PM
+Exception with message  "There is no row at position 0." was found. Additional Info: "exception occured while getting the latest debate id." logged at 11/2/2016 6:23:14 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 6:23:20 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 6:25:46 PM
+Exception with message  "String or binary data would be truncated.
+The statement has been terminated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 6:30:03 PM
+Exception with message  "Incorrect syntax near 'OUTPUT'." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 6:37:50 PM
+Exception with message  "Incorrect syntax near 'OUTPUT'." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 6:39:09 PM
+Exception with message  "String or binary data would be truncated." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 6:40:28 PM
+Exception with message  "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Debates_ToTable". The conflict occurred in database "D:\SCHOOL\SPSU\SEMESTER 5\SWE\PROJECT\NEW SOURCES\NEW FOLDER\DEBATESCHEDULER\DEBATESCHEDULER\APP_DATA\DATABASE.MDF", table "dbo.Teams", column 'Id'." was found. Additional Info: "exception occured while adding a debate." logged at 11/2/2016 6:41:48 PM

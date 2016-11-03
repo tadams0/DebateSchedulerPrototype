@@ -104,7 +104,7 @@ namespace DebateScheduler
                 }
                 else if (teamName.Length < Help.GetMinimumTeamNameSize())
                 {
-                    ShowTeamInfoLabel("Invalid team name. The team name is too short, team names contain at least " + Help.GetMinimumTeamNameSize() + " characters.", Color.Red, i);
+                    ShowTeamInfoLabel("Invalid team name. The team name is too short, team names must contain at least " + Help.GetMinimumTeamNameSize() + " characters.", Color.Red, i);
                     nameError = true;
                 }
                 else
@@ -157,6 +157,7 @@ namespace DebateScheduler
             bool errorOccured = false;
 
             List<Team> teams = GetTeams();
+
             if (nameError)
             {
                 Label_ScheduleError.Text = "There are errors with the info given. Some team names are invalid.";
@@ -199,23 +200,36 @@ namespace DebateScheduler
                 //Adding the teams to the database
                 foreach (Team t in teams)
                 {
-                    DatabaseHandler.AddTeam(Session, t);
+                    int id;
+                    DatabaseHandler.AddTeam(Session, t, out id);
+                    t.ID = id;
                 }
 
                 //Creating the actual debates
                 List<DateTime> saturdays = Help.SatBetween(startDate, endDate);
                 List<TeamPair> pairs = Help.MatchMake(saturdays, teams);
-                
-                DatabaseHandler.ClearDebates(Session);
+                List<Debate> debates = new List<Debate>();
+
                 foreach (TeamPair p in pairs)
                 {
                     Debate debate = p as Debate;
-                    if (p != null)
-                    {
-                        DatabaseHandler.AddDebate(Session, p);
-                    }
+                    int assignedID;
+                    DatabaseHandler.AddDebate(Session, p, out assignedID);
+                    debate.ID = assignedID;
+                    debates.Add(debate);
                 }
+
+                int seasonID;
+                DebateSeason newSeason = new DebateSeason(0, teams, debates);
+                //int test = DatabaseHandler.GetLatestSeasonID();
+                DatabaseHandler.AddDebateSeason(Session, newSeason, out seasonID);
+
+                Help.SetDebateID(Application, seasonID);
+
+                Response.Redirect("Default.aspx");
             }
+
+
         }
 
 

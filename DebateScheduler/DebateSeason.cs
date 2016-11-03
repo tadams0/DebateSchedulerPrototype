@@ -18,6 +18,7 @@ namespace DebateScheduler
         {
             List<int> teamIDs = new List<int>();
             string[] ids = teamString.Split('|');
+            
             foreach (string s in ids)
             {
                 int id = int.Parse(s);
@@ -67,14 +68,20 @@ namespace DebateScheduler
             set { debates = value; }
         }
 
+        /// <summary>
+        /// Gets or sets a boolean that determines if the debate season has ended (true) or is still ongoing (false).
+        /// </summary>
+        public bool HasEnded { get; set; }
+
         private List<Team> teams = new List<Team>();
         private List<Debate> debates = new List<Debate>();
 
-        public DebateSeason(int id, List<Team> teams, List<Debate> debates)
+        public DebateSeason(int id, bool hasEnded, List<Team> teams, List<Debate> debates)
         {
             ID = id;
             this.teams = teams;
             this.debates = debates;
+            this.HasEnded = hasEnded;
         }
 
         /// <summary>
@@ -89,6 +96,8 @@ namespace DebateScheduler
                 builder.Append(t.ID);
                 builder.Append("|");
             }
+            if (builder.Length > 1)
+                builder.Remove(builder.Length - 1, 1); //Removes the last appended '|' character.
             return builder.ToString();
         }
         
@@ -100,6 +109,8 @@ namespace DebateScheduler
                 builder.Append(d.ID);
                 builder.Append("|");
             }
+            if (builder.Length > 1)
+                builder.Remove(builder.Length - 1, 1); //Removes the last appended '|' character.
             return builder.ToString();
         }
         

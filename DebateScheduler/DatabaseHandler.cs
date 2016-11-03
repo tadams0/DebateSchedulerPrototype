@@ -209,6 +209,47 @@ namespace DebateScheduler
         }
 
         /// <summary>
+        /// Gets the latest record added to a database table.
+        /// </summary>
+        /// <param name="connectionString">The connection string used to direct the connection to a specific database.</param>
+        /// <param name="table">The name of the table in the database to connect to.</param>
+        /// <param name="exceptionInfo">The info that will be logged in the event of an exception occuring.</param>
+        /// <returns>Returns a data table with the matched data from the connected database.</returns>
+        private static DataTable GetLatestRecord(string connectionString, string table, string exceptionInfo = "")
+        {
+            DataTable resultingTable = null;
+
+            SqlConnection connection = new SqlConnection(GetConnectionStringUsersTable());
+
+            try
+            {
+                SqlCommand command = new SqlCommand("SELECT TOP 1 * FROM " + table + " ORDER BY Id DESC", connection);
+                using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                {
+                    resultingTable = new DataTable();
+                    adapter.Fill(resultingTable);
+                }
+            }
+            catch (Exception e)
+            {
+                if (exceptionInfo == "")
+                {
+                    LogException(e, "exception occured while getting a database table's latest record.");
+                }
+                else
+                {
+                    LogException(e, exceptionInfo);
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return resultingTable;
+        }
+
+        /// <summary>
         /// Attempts to execute a SQL query. The query is not sanitized in this method, so all sanitization must be done before passing the query in.
         /// </summary>
         /// <param name="connectionString">The database connection string where the query will be directed to.</param>
@@ -781,7 +822,7 @@ namespace DebateScheduler
         }
 
         /// <summary>
-        /// Gets a team from the database based on their name.
+        /// Gets a team from the database based on their name. This returns the most recent addition to the database, if there are more than one team with the same name. Use by ID to get exact teams.
         /// </summary>
         /// <param name="name">The name of the team to search for.</param>
         /// <returns>Returns a team object which contains all the data of the matching team in the database. This will be null if there is no matching team.</returns>
@@ -793,12 +834,12 @@ namespace DebateScheduler
 
             if (table.Rows.Count > 0)
             {
-                int id = (int)table.Rows[0]["Id"];
-                string teamName = table.Rows[0]["Name"] as string;
-                int wins = (int)table.Rows[0]["Wins"];
-                int losses = (int)table.Rows[0]["Losses"];
-                int ties = (int)table.Rows[0]["Ties"];
-                int totalScore = (int)table.Rows[0]["TotalScore"];
+                int id = (int)table.Rows[table.Rows.Count - 1]["Id"];
+                string teamName = table.Rows[table.Rows.Count - 1]["Name"] as string;
+                int wins = (int)table.Rows[table.Rows.Count - 1]["Wins"];
+                int losses = (int)table.Rows[table.Rows.Count - 1]["Losses"];
+                int ties = (int)table.Rows[table.Rows.Count - 1]["Ties"];
+                int totalScore = (int)table.Rows[table.Rows.Count - 1]["TotalScore"];
                 newTeam = new Team(teamName, id, wins, losses, ties, totalScore); //The resulting team object.
             }
 
@@ -819,8 +860,8 @@ namespace DebateScheduler
             {
                 Team matchedTeam = GetTeam(newTeam.Name);
 
-                if (matchedTeam == null) //If there is no team that matches names.
-                {
+                //if (matchedTeam == null) //If there is no team that matches names. This is done when creating the schedule instead.
+                //{
                     string sqlQuery = "INSERT INTO Teams (Name, Wins, Losses, Ties, TotalScore) VALUES " + //Id, 
                         "(@TeamName, '" + newTeam.Wins + "', '" + newTeam.Losses + "', '" + newTeam.Ties + "', '" + newTeam.TotalScore + "')"; //'" + newUser.ID + "', 
                     SqlParameter teamName = new SqlParameter("@TeamName", SqlDbType.NChar, newTeam.Name.Length);
@@ -832,7 +873,7 @@ namespace DebateScheduler
                         Log(currentSessionUser.Username, currentSessionUser.Username + " added a new team with parameters " + newTeam.ToString() + ".");
                         return true;
                     }
-                }
+                //}
             }
 
             return false;
@@ -854,8 +895,8 @@ namespace DebateScheduler
             {
                 Team matchedTeam = GetTeam(newTeam.Name);
 
-                if (matchedTeam == null) //If there is no team that matches names.
-                {
+                //if (matchedTeam == null) //If there is no team that matches names. This is done when creating the schedule instead.
+                //{
                     string sqlQuery = "INSERT INTO Teams (Name, Wins, Losses, Ties, TotalScore) " + //Id, 
                         "OUTPUT INSERTED.Id " +
                         "VALUES(@TeamName, '" + newTeam.Wins + "', '" + newTeam.Losses + "', '" + newTeam.Ties + "', '" + newTeam.TotalScore + "')"; //'" + newUser.ID + "', 
@@ -869,7 +910,7 @@ namespace DebateScheduler
                         Log(currentSessionUser.Username, currentSessionUser.Username + " added a new team with parameters " + newTeam.ToString() + ".");
                         return true;
                     }
-                }
+                //}
             }
 
             return false;
@@ -1425,6 +1466,98 @@ namespace DebateScheduler
         }
 
         /// <summary>
+        /// Gets the most recent debate season found in the database.
+        /// </summary>
+        /// <returns>Returns a debate season that was found in the database which was also the most recent addition.</returns>
+        public static DebateSeason GetMostRecentSeason()
+        {
+            DebateSeason resultingSeason = null;
+            DataTable table = GetLatestRecord(GetConnectionStringUsersTable(), "Seasons", "exception occured while gathering a debate season.");
+
+            if (table.Rows.Count > 0)
+            {
+                string debateString = table.Rows[0]["Debates"] as string;
+                List<int> debateIDs = DebateSeason.ParseDebateString(debateString);
+
+                string teamsString = table.Rows[0]["Teams"] as string;
+                List<int> teamIDs = DebateSeason.ParseTeamString(teamsString);
+
+                int id = (int)table.Rows[0]["Id"];
+
+                bool hasEnded = Convert.ToBoolean(table.Rows[0]["HasEnded"]);
+
+                //Loading in the teams
+                List<Team> teams = new List<Team>();
+                foreach (int i in teamIDs)
+                {
+                    teams.Add(GetTeam(i));
+                }
+
+                //Loading in the debates
+                List<Debate> debates = new List<Debate>();
+                foreach (int i in debateIDs)
+                {
+                    debates.Add(GetDebate(i));
+                }
+
+                resultingSeason = new DebateSeason(id, hasEnded, teams, debates);
+            }
+
+            return resultingSeason;
+        }
+
+        /// <summary>
+        /// Gets the list of teams in a given debate season.
+        /// </summary>
+        /// <param name="id">The id of the debate season.</param>
+        /// <returns>Returns a list of teams populated from the database.</returns>
+        public static List<Team> GetDebateSeasonTeams(int id)
+        {
+            List<Team> teams = new List<Team>();
+            DataTable table = GetDataTable(GetConnectionStringUsersTable(), "Seasons", "Id", id.ToString(), SqlDbType.Int, int.MaxValue, true, "exception occured while gathering a debate season.");
+
+            if (table.Rows.Count > 0)
+            {
+                string teamsString = table.Rows[0]["Teams"] as string;
+                List<int> teamIDs = DebateSeason.ParseTeamString(teamsString);
+
+                //Loading in the teams
+                foreach (int i in teamIDs)
+                {
+                    teams.Add(GetTeam(i));
+                }
+                
+            }
+
+            return teams;
+        }
+
+        /// <summary>
+        /// Gets a list of debates in a given debate season.
+        /// </summary>
+        /// <param name="id">The id of the debate.</param>
+        /// <returns>Returns a list of debates in a given season.</returns>
+        public static List<Debate> GetDebateSeasonDebates(int id)
+        {
+            List<Debate> debates = new List<Debate>();
+            DataTable table = GetDataTable(GetConnectionStringUsersTable(), "Seasons", "Id", id.ToString(), SqlDbType.Int, int.MaxValue, true, "exception occured while gathering a debate season.");
+
+            if (table.Rows.Count > 0)
+            {
+                string debateString = table.Rows[0]["Debates"] as string;
+                List<int> debateIDs = DebateSeason.ParseDebateString(debateString);
+                
+                //Loading in the debates
+                foreach (int i in debateIDs)
+                {
+                    debates.Add(GetDebate(i));
+                }
+            }
+
+            return debates;
+        }
+
+        /// <summary>
         /// Gets a debate season by id.
         /// </summary>
         /// <param name="id">The id of the debate season.</param>
@@ -1442,6 +1575,8 @@ namespace DebateScheduler
                 string teamsString = table.Rows[0]["Teams"] as string;
                 List<int> teamIDs = DebateSeason.ParseTeamString(teamsString);
 
+                bool hasEnded = Convert.ToBoolean(table.Rows[0]["HasEnded"]);
+
                 //Loading in the teams
                 List<Team> teams = new List<Team>();
                 foreach (int i in teamIDs)
@@ -1456,7 +1591,7 @@ namespace DebateScheduler
                     debates.Add(GetDebate(i));
                 }
 
-                resultingSeason = new DebateSeason(id, teams, debates);
+                resultingSeason = new DebateSeason(id, hasEnded, teams, debates);
             }
 
             return resultingSeason;
@@ -1474,19 +1609,25 @@ namespace DebateScheduler
 
             if (currentSessionUser != null && currentSessionUser.PermissionLevel >= permissionToAddSeasons && season != null) //If the given season is not null and proper permissions are matched.
             {
-                string sqlQuery = "INSERT INTO Seasons (Debates, Teams) VALUES " +
-                        "(@Debates, @Teams)";
+                string sqlQuery = "INSERT INTO Seasons (Debates, Teams, HasEnded) VALUES " +
+                        "(@Debates, @Teams, @Ended)";
 
                 string debateString = season.GetDebateString();
                 string teamString = season.GetTeamString();
+
+                byte bitValue = 0;
+                if (season.HasEnded)
+                    bitValue = 1;
 
                 SqlParameter debates = new SqlParameter("@Debates", SqlDbType.NVarChar, debateString.Length);
                 debates.Value = debateString;
                 SqlParameter teams = new SqlParameter("@Teams", SqlDbType.NVarChar, teamString.Length);
                 teams.Value = teamString;
+                SqlParameter ended = new SqlParameter("@Ended", SqlDbType.Bit);
+                ended.Value = bitValue;
 
                 SqlDataReader result = ExecuteSQL(GetConnectionStringUsersTable(), sqlQuery, "exception occured while adding a new debate season.",
-                    debates,teams);
+                    debates,teams, ended);
 
                 if (result != null) //If the result is not null, then the query succeeded and should be logged.
                 {
@@ -1512,20 +1653,27 @@ namespace DebateScheduler
 
             if (currentSessionUser != null && currentSessionUser.PermissionLevel >= permissionToAddSeasons && season != null) //If the given season is not null and proper permissions are matched.
             {
-                string sqlQuery = "INSERT INTO Seasons (Debates, Teams) " +
+                string sqlQuery = "INSERT INTO Seasons (Debates, Teams, HasEnded) " +
                     "OUTPUT INSERTED.Id "+ 
-                        "VALUES(@Debates, @Teams)";
+                        "VALUES(@Debates, @Teams, @Ended)";
 
                 string debateString = season.GetDebateString();
                 string teamString = season.GetTeamString();
+
+                byte bitValue = 0;
+                if (season.HasEnded)
+                    bitValue = 1;
 
                 SqlParameter debates = new SqlParameter("@Debates", SqlDbType.NVarChar, debateString.Length);
                 debates.Value = debateString;
                 SqlParameter teams = new SqlParameter("@Teams", SqlDbType.NVarChar, teamString.Length);
                 teams.Value = teamString;
+                SqlParameter ended = new SqlParameter("@Ended", SqlDbType.Bit);
+                ended.Value = bitValue;
+
 
                 object result = ExecuteSQLScaler(GetConnectionStringUsersTable(), sqlQuery, "exception occured while adding a new debate season.",
-                    debates, teams);
+                    debates, teams, ended);
 
                 if (result != null) //If the result is not null, then the query succeeded and should be logged.
                 {
@@ -1553,7 +1701,7 @@ namespace DebateScheduler
                 if (currentSeason != null) //We ensure that the data exists, otherwise we cannot update something that doesn't exist.
                 {
                     string sqlQuery = "UPDATE Seasons SET " +
-                                "Debates = @Debates, Teams = @Teams" +
+                                "Debates = @Debates, Teams = @Teams, HasEnded = @Ended" +
                                 " WHERE Id = " + season.ID;
                     
                     //Generating the parameters, this is done for sanitization reasons.
@@ -1565,8 +1713,14 @@ namespace DebateScheduler
                     SqlParameter teamData = new SqlParameter("@Teams", SqlDbType.NVarChar, teamString.Length);
                     teamData.Value = teamString;
 
+                    byte bitValue = 0;
+                    if (season.HasEnded)
+                        bitValue = 1;
+                    SqlParameter ended = new SqlParameter("@Ended", SqlDbType.Bit);
+                    ended.Value = bitValue;
+
                     SqlDataReader result = ExecuteSQL(GetConnectionStringUsersTable(), sqlQuery, "exception occured while updating a debate season.",
-                        debateData, teamData);
+                        debateData, teamData, ended);
 
                     if (result != null)
                     {

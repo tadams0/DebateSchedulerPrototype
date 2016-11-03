@@ -220,7 +220,7 @@ namespace DebateScheduler
                 }
 
                 int seasonID;
-                DebateSeason newSeason = new DebateSeason(0, teams, debates);
+                DebateSeason newSeason = new DebateSeason(0, false, teams, debates);
                 //int test = DatabaseHandler.GetLatestSeasonID();
                 DatabaseHandler.AddDebateSeason(Session, newSeason, out seasonID);
 

@@ -152,6 +152,7 @@
       <DependentUpon>News.aspx</DependentUpon>
     </Compile>
     <Compile Include="NewsPost.cs" />
+    <Compile Include="OrderByEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecoverPassword.aspx.cs">
       <DependentUpon>RecoverPassword.aspx</DependentUpon>

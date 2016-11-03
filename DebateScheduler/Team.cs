@@ -78,6 +78,16 @@ namespace DebateScheduler
             this.totalScore = totalScore;
         }
 
+        public string GetName()
+        {
+            return name;
+        }
+
+        public int GetWins()
+        {
+            return wins;
+        }
+
         /// <summary>
         /// Gets the string representation of the team object.
         /// </summary>

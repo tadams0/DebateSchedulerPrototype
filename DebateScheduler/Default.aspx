@@ -3,7 +3,14 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
 
-    <p style="height: 531px; width: 949px">
-        &nbsp;</p>
+    <div id ="debateDisplay"> 
+    <asp:Panel ID="Panel1" runat="server">
+        <br />
+        <asp:Table ID="Table1" runat="server" BorderStyle="Solid" GridLines="Both" HorizontalAlign="Center">
+        </asp:Table>
+        <br />
+    </asp:Panel>
+    </div>
+    
 
 </asp:Content>

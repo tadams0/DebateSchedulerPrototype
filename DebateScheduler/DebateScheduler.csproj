@@ -80,10 +80,14 @@
     <Content Include="DebateCreatorStyle.css" />
     <Content Include="Default.aspx" />
     <Content Include="DefaultStyle.css" />
+    <Content Include="NewFolder1\RightClickLogo.jpg" />
     <Content Include="News.aspx" />
     <Content Include="NewsStyle.css" />
     <Content Include="packages.config" />
     <Content Include="MasterPage.Master" />
+    <Content Include="Schedule.aspx" />
+    <Content Include="Rankings.aspx" />
+    <Content Include="AboutUs.aspx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -180,6 +184,27 @@
     <Compile Include="Team.cs" />
     <Compile Include="TeamPair.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="Schedule.aspx.cs">
+      <DependentUpon>Schedule.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Schedule.aspx.designer.cs">
+      <DependentUpon>Schedule.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Rankings.aspx.cs">
+      <DependentUpon>Rankings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Rankings.aspx.designer.cs">
+      <DependentUpon>Rankings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AboutUs.aspx.cs">
+      <DependentUpon>AboutUs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AboutUs.aspx.designer.cs">
+      <DependentUpon>AboutUs.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

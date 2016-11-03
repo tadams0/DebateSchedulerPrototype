@@ -267,7 +267,12 @@ namespace DebateScheduler
         {
             return DateTime.ParseExact(date, DateFormat, CultureInfo.InvariantCulture);
         }
-
+        /// <summary>
+        /// Gets a list of saturdays between two dates.
+        /// </summary>
+        /// <param name="StartDate">The DateTime that marks the beginning of the season.</param>
+        /// <param name="EndDate">The DateTime that marks the end of the season.</param>
+        /// <returns>Returns a list of every between the beginning and end of the season.</returns>
         public static List<DateTime> SatBetween(DateTime StartDate, DateTime EndDate)
         {
             if (StartDate.DayOfWeek != DayOfWeek.Saturday)
@@ -302,7 +307,6 @@ namespace DebateScheduler
         public static List<TeamPair> MatchMake(List<DateTime> Saturdays, List<Team> teamList)
         {
             int n = teamList.Count;
-            //satList = satList.OrderBy(Saturday => Saturday.date);
             List<TeamPair> teamPairs = new List<TeamPair>((n * (n - 1)) / 2);
             for (int i = 0; i < teamList.Count; i++)
             {
@@ -331,6 +335,150 @@ namespace DebateScheduler
                     currentSaturday = 0;
             }
             return (teamPairs);
+        }
+        /// <summary>
+        /// Sorts a list of teams by score.
+        /// </summary>
+        /// <param name="matchupList">The list of matches in a season.</param>
+        /// <param name="teamList">The list of teams in a season.</param>
+        /// <returns>Returns an ordered list of teams from highest to lowest score.</returns>
+        public static List<Team> SortScore(List<TeamPair> matchupList, List<Team> teamList)
+        {
+            foreach (TeamPair i in matchupList)
+            {
+                int j = 0, k = 0;
+                while (j <= teamList.Count)
+                {
+                    if (i.Team1.ID == teamList[j].ID)
+                    {
+                        teamList[j].TotalScore += i.Team1Score;
+                        break;
+                    }
+                    else
+                        j++;
+                }
+                while (k <= teamList.Count)
+                {
+                    if (i.Team2.ID == teamList[k].ID)
+                    {
+                        teamList[k].TotalScore += i.Team2Score;
+                        break;
+                    }
+                    else
+                        j++;
+                }
+            }
+            teamList = teamList.OrderBy(a => a.TotalScore).ToList();
+            return teamList;
+        }
+        /// <summary>
+        /// assigns wins, losses, and ties to each team.
+        /// </summary>
+        /// <param name="matchupList">The list of matches in a season.</param>
+        /// <param name="teamList">The list of teams in a season.</param>
+        /// <returns>Returns a list of teams with updated wins, losses, and ties.</returns>
+        public static List<Team> AssignResults(List<TeamPair> matchupList, List<Team> teamList)
+        {
+            foreach (TeamPair i in matchupList)
+            {
+                if (i.Team1Score > i.Team2Score)
+                {
+                    int j = 0, k = 0;
+                    while (j <= teamList.Count)
+                    {
+                        if (i.Team1.ID == teamList[j].ID)
+                        {
+                            teamList[j].Wins++;
+                            break;
+                        }
+                        else
+                            j++;
+                    }
+                    while (k <= teamList.Count)
+                    {
+                        if (i.Team2.ID == teamList[k].ID)
+                        {
+                            teamList[k].Losses++;
+                            break;
+                        }
+                        else
+                            j++;
+                    }
+                }
+
+                else if (i.Team1Score < i.Team2Score)
+                {
+                    int j = 0, k = 0;
+                    while (j <= teamList.Count)
+                    {
+                        if (i.Team1.ID == teamList[j].ID)
+                        {
+                            teamList[j].Losses++;
+                            break;
+                        }
+                        else
+                            j++;
+                    }
+                    while (k <= teamList.Count)
+                    {
+                        if (i.Team2.ID == teamList[k].ID)
+                        {
+                            teamList[k].Wins++;
+                            break;
+                        }
+                        else
+                            j++;
+                    }
+                }
+                else if (i.Team1Score == i.Team2Score)
+                {
+                    int j = 0, k = 0;
+                    while (j <= teamList.Count)
+                    {
+                        if (i.Team1.ID == teamList[j].ID)
+                        {
+                            teamList[j].Ties++;
+                            break;
+                        }
+                        else
+                            j++;
+                    }
+                    while (k <= teamList.Count)
+                    {
+                        if (i.Team2.ID == teamList[k].ID)
+                        {
+                            teamList[k].Ties++;
+                            break;
+                        }
+                        else
+                            j++;
+                    }
+                }
+            }
+            return teamList;
+        }
+        /// <summary>
+        /// Determines who wins based on score and wins.
+        /// </summary>
+        /// <param name="matchupList">The list of matches in a season.</param>
+        /// <param name="teamList">The list of teams in a season.</param>
+        /// <returns>Returns a list of teams ordered primarily by scores and secondarily by wins</returns>
+        public static List<Team> WhoWins(List<TeamPair> matchupList,ref List<Team> teamList)
+        {
+            AssignResults(matchupList,teamList);
+            SortScore(matchupList, teamList);
+            for (int i = 0; i <= teamList.Count; i++)
+            {
+                if (teamList[i].TotalScore == teamList[i+1].TotalScore)
+                    if (teamList[i+1].Wins > teamList[i].Wins)
+                    {
+                        Team temp = teamList[i];
+                        teamList[i] = teamList[i + 1];
+                        teamList[i + 1] = temp;
+                    }
+
+            }
+            return teamList;
         }
     }
 }

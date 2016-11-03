@@ -34,8 +34,8 @@ namespace DebateScheduler
             //Or if the user is logged in but their permission level is less than the page's permission level..
             if ((user == null && PermissionLevel > 1) || (user != null && user.PermissionLevel < PermissionLevel))
             {
-                if (Request.Url.AbsolutePath.ToUpperInvariant() != "/default.aspx".ToUpperInvariant())
-                    Response.Redirect("Default.aspx");
+                if (Request.Url.AbsolutePath.ToUpperInvariant() != "/News.aspx".ToUpperInvariant())
+                    Response.Redirect("News.aspx");
             }
         }
 
@@ -47,10 +47,6 @@ namespace DebateScheduler
                 Help.AddUserSession(Session, newUser);
                 
                 FillLogout();
-                if (newUser.PermissionLevel == 2)
-                    Server.Transfer("RefereeView.aspx", true);
-                else if (newUser.PermissionLevel == 3)
-                    Server.Transfer("SuperView.aspx", true);
             }
             else
             {

@@ -11,9 +11,16 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <header>
-        Where's the Right Click?
-        <div id ="Login">
+        <table style="margin: 0 auto;width:100%">
+            <tr>
+                <td>
+                    <img src="NewFolder1/RightClickLogo.jpg" />
+                </td>
+                <td style="margin: 0 auto;background-color:cornflowerblue;width:75%;text-align:center;font:'Segoe UI';font-size:larger">
+                    Where is the Right Click? Debate Scheduler
+                </td>
+                <td>
+                    <div id ="Login">
             <asp:Login ID="Login1" runat="server" Height="41px" Width="269px" BorderStyle="None" TitleText="" OnAuthenticate="Login1_Authenticate" CreateUserText="Create User" CreateUserUrl="Register.aspx" PasswordRecoveryText="Recover Lost Password" PasswordRecoveryUrl="RecoverPassword.aspx">
             </asp:Login>
         <div id ="Logout">
@@ -28,8 +35,30 @@
 
         </div>
         </div>
-    &nbsp;</header>
-    <div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" style="height:30px"></td>
+            </tr>
+            <tr>
+                <td colspan="3" style="height:50px;background-color:cornflowerblue;">
+                    <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal"  >
+                        <Items>
+                            <asp:MenuItem Text="Home" Value="Home" NavigateUrl="~/News.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Schedule" Value="Schedule" NavigateUrl="~/Schedule.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Rankings" Value="Rankings" NavigateUrl="~/Rankings.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="About Us" Value="About Us" NavigateUrl="~/AboutUs.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Contact Us" Value="Contact Us"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/RefereeView.aspx" Text="Referee" Value="Refere"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/AdminPanel.aspx" Text="Admin" Value="Admin"></asp:MenuItem>
+                        </Items>
+                        <StaticHoverStyle BackColor="#FF6600" ForeColor="White" BorderColor="White" BorderStyle="Solid" BorderWidth="1px" />
+                        <StaticMenuItemStyle BackColor="CornflowerBlue" ForeColor="Black" HorizontalPadding="30px" />
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+            <div>
         <asp:ContentPlaceHolder ID="mainContent" runat="server">
             
 

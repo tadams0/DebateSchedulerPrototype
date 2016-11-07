@@ -317,25 +317,72 @@ namespace DebateScheduler
             }
 
             teamPairs = teamPairs.OrderBy(a => a.PairID).ToList();
-            int currentSaturday = 0;
-            for (int i = 0; i < teamPairs.Count / 2; i++)
+            Dictionary<int, int> prevTeams = new Dictionary<int, int>();
+            foreach (TeamPair tp in teamPairs)
             {
-                teamPairs[i].MorningDebate = true;
-                teamPairs[i].Date = Saturdays[currentSaturday];
-                currentSaturday++;
-                if (currentSaturday >= Saturdays.Count)
-                    currentSaturday = 0;
-            }
-            for (int i = teamPairs.Count / 2 + 1; i < teamPairs.Count - 1; i++)
-            {
-                teamPairs[i].MorningDebate = false;
-                teamPairs[i].Date = Saturdays[currentSaturday];
-                currentSaturday++;
-                if (currentSaturday >= Saturdays.Count)
-                    currentSaturday = 0;
+                int sat = 0;
+                Team teamA = tp.Team1;
+                Team teamB = tp.Team2;
+
+                if (prevTeams.ContainsKey(teamA.ID))
+                    prevTeams[teamA.ID] += 1;
+                else
+                    prevTeams[teamA.ID] = 1;
+
+                int aVal = prevTeams[teamA.ID] % 2;
+                int bVal = prevTeams[teamB.ID] % 2;
+                if (aVal == 0)
+                    aVal = 2;
+                if (bVal == 0)
+                    bVal = 2;
+
+                if ((aVal + bVal) % 3 == 0)
+                {
+                    tp.MorningDebate = false;
+                }
+                else if((aVal + bVal) % 3 == 1)
+                {
+                    tp.MorningDebate = false;
+                }
+                else if ((aVal + bVal) % 3 == 2)
+                {
+                    tp.MorningDebate = true;
+                }
+
+                if (prevTeams[teamA.ID] >= 3 || prevTeams[teamB.ID] >= 3)
+                {
+                    if (!((aVal+bVal) == 0))
+                    {
+                        if (aVal < bVal)
+                            sat += prevTeams[teamB.ID];
+                        else
+                            sat += prevTeams[teamA.ID];
+                    }
+                }
+
+                tp.Date = Saturdays[sat];
             }
             return (teamPairs);
         }
+
+        private static void CheckTeam(Dictionary<int, int> prevTeams, Team team, ref int currentSaturday)
+        {
+            int value = prevTeams[team.ID];
+            if (prevTeams.ContainsKey(team.ID))
+                value += 1;
+            else
+                value = 1;
+
+            if(value % 2 == 1)
+            {
+                if ( value != 1)
+                {
+                    currentSaturday++;
+                }
+
+            }
+        }
+
         /// <summary>
         /// Sorts a list of teams by score.
         /// </summary>

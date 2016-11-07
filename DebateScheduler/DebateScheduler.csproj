@@ -206,6 +206,8 @@
     <Compile Include="AboutUs.aspx.designer.cs">
       <DependentUpon>AboutUs.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UserCode.cs" />
+    <Compile Include="UserCodeErrorEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

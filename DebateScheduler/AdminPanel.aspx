@@ -31,6 +31,18 @@
         <br />
         <asp:Button ID="Button_RefereeMaker" runat="server" Text="Add Referee" OnClick="Button_RefereeMaker_Click" />
         <asp:Button ID="Button_RevokeReferee" runat="server" OnClick="Button_RevokeReferee_Click" Text="Revoke Referee" />
+        <br />
+        <br />
+        <asp:Label ID="Label_RefereeCode" runat="server" Text="Referee Code"></asp:Label>
+        <br />
+        <asp:Label ID="Label_CodeResult" runat="server" Text="Code Result" Visible="False"></asp:Label>
+        <br />
+        <asp:Button ID="Button_GenerateCode" runat="server" OnClick="Button_GenerateCode_Click" Text="Generate New Code" />
+        <br />
+        <br />
+        <asp:Label ID="Label1" runat="server" Text="Active Codes"></asp:Label>
+        <asp:Panel ID="Panel_ActiveCodes" runat="server" HorizontalAlign="Center">
+        </asp:Panel>
     </asp:Panel>
         <br />
         </div>

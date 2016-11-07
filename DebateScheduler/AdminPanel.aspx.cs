@@ -12,45 +12,57 @@ namespace DebateScheduler
     public partial class AdminPanel : System.Web.UI.Page
     {
         private NewsPost editingPost = null;
+        private Color codeColor = Color.ForestGreen;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             ((MasterPage)Master).SetPagePermissionLevel(3);
-
-            string[] logLines = DatabaseHandler.GetLog(Session);
-
-            Label_LogTitle.Text = "Logs as of " + DateTime.Now;
-
-            if (logLines != null)
+            User loggedUser = Help.GetUserSession(Session);
+            if (loggedUser != null && loggedUser.PermissionLevel >= 3)
             {
-                foreach (string s in logLines)
+                string[] logLines = DatabaseHandler.GetLog(Session);
+
+                Label_LogTitle.Text = "Logs as of " + DateTime.Now;
+
+                if (logLines != null)
                 {
-                    Label l = new Label();
-                    l.Text = s;
-                    Panel_ViewLog.Controls.AddAt(2, l);
-                    Panel_ViewLog.Controls.AddAt(2, new LiteralControl("<br /> <br />"));
+                    foreach (string s in logLines)
+                    {
+                        Label l = new Label();
+                        l.Text = s;
+                        Panel_ViewLog.Controls.AddAt(2, l);
+                        Panel_ViewLog.Controls.AddAt(2, new LiteralControl("<br /> <br />"));
+                    }
+                }
+
+                List<string> activeCodes = DatabaseHandler.GetActiveCodes(Session);
+
+                foreach (string s in activeCodes)
+                {
+                    Label codeLabel = new Label();
+                    codeLabel.ForeColor = codeColor;
+                    codeLabel.Text = s;
+                    Panel_ActiveCodes.Controls.Add(codeLabel);
+                    Panel_ActiveCodes.Controls.Add(new LiteralControl("<br />"));
+                }
+
+                //Slow loading this is a temporary solution
+                //System.Threading.Thread.Sleep(1000);
+
+                //Checking if data needs to be filled in...
+                string editID = Request.QueryString["editID"];
+                if (editID != null)
+                {
+                    int postID = int.Parse(editID);
+                    NewsPost post = DatabaseHandler.GetNewsPost(postID);
+                    if (post != null && post.Creator.ID == loggedUser.ID)
+                    {
+                        editingPost = post;
+                        FreeTextBox1.Text = post.Data; //Server.HtmlDecode(post.Data);
+                        FreeTextBox1.UpdateToolbar = true;
+                    }
                 }
             }
-
-            //Slow loading this is a temporary solution
-            //System.Threading.Thread.Sleep(1000);
-
-            //Checking if data needs to be filled in...
-            string editID = Request.QueryString["editID"];
-            if (editID != null)
-            {
-                User loggedUser = Help.GetUserSession(Session);
-
-                int postID = int.Parse(editID);
-                NewsPost post = DatabaseHandler.GetNewsPost(postID);
-                if (post != null && post.Creator.ID == loggedUser.ID)
-                {
-                    editingPost = post;
-                    FreeTextBox1.Text = post.Data; //Server.HtmlDecode(post.Data);
-                    FreeTextBox1.UpdateToolbar = true;
-                }
-            }
-
         }
 
 
@@ -199,6 +211,24 @@ namespace DebateScheduler
                 {
                     ShowNewsInfo("This is not a post yet, press Submit New instead.", Color.Red);
                 }
+            }
+        }
+
+        protected void Button_GenerateCode_Click(object sender, EventArgs e)
+        {
+            string code;
+            bool result = DatabaseHandler.AddUserCode(Session, out code);
+            if (result)
+            {
+                Label_CodeResult.Visible = true;
+                Label_CodeResult.Text = "Your new code is: " + code;
+                Label_CodeResult.ForeColor = Color.Green;
+            }
+            else
+            {
+                Label_CodeResult.Visible = true;
+                Label_CodeResult.Text = "There has been an error generating a new code.";
+                Label_CodeResult.ForeColor = Color.Red;
             }
         }
     }

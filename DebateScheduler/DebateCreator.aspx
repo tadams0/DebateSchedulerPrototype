@@ -36,9 +36,20 @@
                             <asp:Label ID="Label_StartDate" runat="server" Text="Start Date"></asp:Label>
                             <asp:Calendar ID="Calendar_Start" runat="server" OnDayRender="Calendar_Start_DayRender"></asp:Calendar>
                             <br />
-                            <asp:Label ID="Label_EndDate" runat="server" Text="End Date"></asp:Label>
+                            <asp:Label ID="Label_EndDate" runat="server" Text="Season Length"></asp:Label>
                             <br />
-                            <asp:Calendar ID="Calendar_End" runat="server" OnDayRender="Calendar_End_DayRender"></asp:Calendar>
+                            <asp:DropDownList ID="DropDownList1" runat="server" Width="60px">
+                                <asp:ListItem Selected="True" Value="2"></asp:ListItem>
+                                <asp:ListItem Value="3"></asp:ListItem>
+                                <asp:ListItem Value="4"></asp:ListItem>
+                                <asp:ListItem Value="5"></asp:ListItem>
+                                <asp:ListItem Value="6"></asp:ListItem>
+                                <asp:ListItem Value="7"></asp:ListItem>
+                                <asp:ListItem Value="8"></asp:ListItem>
+                                <asp:ListItem Value="9"></asp:ListItem>
+                                <asp:ListItem Value="10"></asp:ListItem>
+                            </asp:DropDownList>
+                            &nbsp;<asp:Label ID="Label1" runat="server" Text="Weeks"></asp:Label>
                             <br />
                         </div>
                     </td>

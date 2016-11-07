@@ -45,17 +45,7 @@ namespace DebateScheduler
 
         protected void Calendar_Start_DayRender(object sender, DayRenderEventArgs e)
         {
-            if (e.Day.Date.DayOfWeek != DayOfWeek.Saturday)
-            {
-                e.Day.IsSelectable = false;
-                e.Cell.Enabled = false;
-                e.Cell.BackColor = Color.Gray;
-            }
-        }
-
-        protected void Calendar_End_DayRender(object sender, DayRenderEventArgs e)
-        {
-            if (e.Day.Date.DayOfWeek != DayOfWeek.Saturday)
+            if (e.Day.Date.DayOfWeek != DayOfWeek.Saturday || (e.Day.Date.Year == DateTime.Now.Year && e.Day.Date.DayOfYear < DateTime.Now.DayOfYear))
             {
                 e.Day.IsSelectable = false;
                 e.Cell.Enabled = false;
@@ -165,21 +155,9 @@ namespace DebateScheduler
                 errorOccured = true;
             }
 
-            if (Calendar_Start.SelectedDates.Count <= 0 && Calendar_End.SelectedDates.Count <= 0)
-            {
-                Label_ScheduleError.Text = "There are errors with the info given. There is no start or end date specified.";
-                Label_ScheduleError.Visible = true;
-                errorOccured = true;
-            }
-            else if (Calendar_Start.SelectedDates.Count <= 0)
+            if (Calendar_Start.SelectedDates.Count <= 0)
             {
                 Label_ScheduleError.Text = "There are errors with the info given. There is no start date specified.";
-                Label_ScheduleError.Visible = true;
-                errorOccured = true;
-            }
-            else if (Calendar_End.SelectedDates.Count <= 0)
-            {
-                Label_ScheduleError.Text = "There are errors with the info given. There is no end date specified.";
                 Label_ScheduleError.Visible = true;
                 errorOccured = true;
             }
@@ -189,13 +167,8 @@ namespace DebateScheduler
                 Label_ScheduleError.Visible = false;
                 //Generate schedule:
                 DateTime startDate = Calendar_Start.SelectedDate;
-                DateTime endDate = Calendar_End.SelectedDate;
-                if (startDate > endDate)
-                {
-                    DateTime temp = endDate;
-                    endDate = startDate;
-                    startDate = temp;
-                }
+                int seasonLength = int.Parse(DropDownList1.SelectedValue);
+                DateTime endDate = startDate.AddDays((seasonLength - 1) * 7);
 
                 //Adding the teams to the database
                 foreach (Team t in teams)

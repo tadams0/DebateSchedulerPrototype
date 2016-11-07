@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.SessionState;
 
@@ -15,10 +16,83 @@ namespace DebateScheduler
         private static readonly int MaximumTeams = 10;
         private static readonly int MaxTeamNameLength = 50;
         private static readonly int MinTeamNameLength = 3;
+        private static readonly int UserCodeLength = 10;
         private static readonly string DateFormat = "O";
         public static readonly string scheduleURL = "Schedule.aspx";
         public static readonly string debateCreatorURL = "DebateCreator.aspx";
+        public static readonly string letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        public static readonly string numbers = "1234567890";
+        public static readonly string specialCharacters = "!@#$%^&*?/";
+        public static readonly Random rand = new Random();
 
+
+        /// <summary>
+        /// Gets a random letter, this can be lower or upper case.
+        /// </summary>
+        /// <param name="amount">The amount of random letters to get.</param>
+        /// <returns>Returns a string with the random letters.</returns>
+        public static string GetRandomLetters(int amount)
+        {
+            StringBuilder strBuilder = new StringBuilder(amount);
+            for (int i = 0; i < amount; i++)
+            {
+                strBuilder.Append(letters[rand.Next(0, letters.Length)]);
+            }
+            return strBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Gets a random number.
+        /// </summary>
+        /// <param name="amount">The amount of random numbers to get.</param>
+        /// <returns>Returns a string with the random numbers.</returns>
+        public static string GetRandomNumbers(int amount)
+        {
+            StringBuilder strBuilder = new StringBuilder(amount);
+            for (int i = 0; i < amount; i++)
+            {
+                strBuilder.Append(numbers[rand.Next(0, numbers.Length)]);
+            }
+            return strBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Gets a random sepcial character.
+        /// </summary>
+        /// <param name="amount">The number of special characters to return.</param>
+        /// <returns>Returns a string with the random special characters in it.</returns>
+        public static string GetRandomSpecialCharacter(int amount)
+        {
+            StringBuilder strBuilder = new StringBuilder(amount);
+            for (int i = 0; i < amount; i++)
+            {
+                strBuilder.Append(specialCharacters[rand.Next(0, specialCharacters.Length)]);
+            }
+            return strBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Generates a random user code, does not add it to the database.
+        /// </summary>
+        /// <returns>Returns a string with a generated user code.</returns>
+        public static string GenerateUserCode()
+        {
+            StringBuilder strBuilder = new StringBuilder(UserCodeLength);
+            bool character = true;
+            for (int i = 0; i < UserCodeLength; i++)
+            {
+                if (rand.Next(0, 2) == 0)
+                    character = true;
+                else
+                    character = false;
+
+                if (character)
+                    strBuilder.Append(GetRandomLetters(1));
+                else
+                    strBuilder.Append(GetRandomNumbers(1));
+            }
+            return strBuilder.ToString();
+        }
 
         /// <summary>
         /// Orders a list of debates by a given variable in a given order and returns the resulting list.

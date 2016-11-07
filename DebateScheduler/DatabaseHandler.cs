@@ -18,6 +18,11 @@ namespace DebateScheduler
     public static class DatabaseHandler
     {
         /// <summary>
+        /// The number of days that must pass before a user code expires.
+        /// </summary>
+        private static int daysBeforeCodeExpiration = 14;
+
+        /// <summary>
         /// The path where exceptions are logged.
         /// </summary>
         private static string exceptionFileName = "dump.txt";
@@ -66,6 +71,8 @@ namespace DebateScheduler
         private static int permissionToUpdateSeasons = 3;
         private static int permissionToRemoveSeasons = 4; //debate seasons cannot be removed.
 
+        private static int permissionToAddUserCodes = 3;
+        private static int permissionToGetActiveUserCodes = 3;
         
         /// <summary>
         /// Gets a data table in a database.
@@ -1396,7 +1403,7 @@ namespace DebateScheduler
         public static bool UpdateNewsPost(HttpSessionState session, NewsPost post)
         {
             User updatingUser = Help.GetUserSession(session);
-            if (updatingUser != null && updatingUser.PermissionLevel >= permissionToUpdateDebates) //If the user's permission level is high enough
+            if (updatingUser != null && updatingUser.PermissionLevel >= permissionToUpdateNews) //If the user's permission level is high enough
             {
                 NewsPost currentPost = GetNewsPost(post.ID);
                 if (currentPost != null) //We ensure that the data exists, otherwise we cannot update something that doesn't exist.
@@ -1798,6 +1805,190 @@ namespace DebateScheduler
                     if (result != null) //If the result is not null, then the query succeeded and should be logged.
                     {
                         Log(currentSessionUser, currentSessionUser.Username + " removed a debate season with id of " + currentSeason.ToString());
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Determines if the given user code exists in the database.
+        /// </summary>
+        /// <param name="code">The code to test.</param>
+        /// <returns>Returns true if the code exists in the database, false otherwise.</returns>
+        private static bool UserCodeExists(string code, out UserCodeError error)
+        {
+            DataTable table = GetDataTable(GetConnectionStringUsersTable(), "UserCodes", "Code", code, SqlDbType.NVarChar, code.Length, true, "exception occured while gathering a user code.");
+            error = UserCodeError.CodeDoesntExist;
+
+            if (table.Rows.Count > 0)
+            {
+                error = UserCodeError.None;
+
+                bool hasBeenUsed = Convert.ToBoolean(table.Rows[0]["Used"]);
+                string dateString = table.Rows[0]["Date"] as string;
+                DateTime date = Help.GetDate(dateString);
+
+                if ((date - DateTime.Now).Days > daysBeforeCodeExpiration)
+                {
+                    error = UserCodeError.CodeExpired;
+                }
+                else if (hasBeenUsed)
+                {
+                    error = UserCodeError.CodeUsed;
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Gets a list of active codes in the database.
+        /// </summary>
+        /// <param name="session">The session that is getting the active codes.</param>
+        /// <returns>Returns a list of codes that can be currently be redeemed.</returns>
+        public static List<string> GetActiveCodes(HttpSessionState session)
+        {
+            User sessionUser = Help.GetUserSession(session);
+            List<string> codes = new List<string>();
+
+            if (sessionUser != null && sessionUser.PermissionLevel >= permissionToAddUserCodes) //If the user exists and their permissions are high enough.
+            {
+                DataTable table = GetDataTable(GetConnectionStringUsersTable(), "UserCodes", "exception occured while gathering the user codes table.");
+
+                foreach (DataRow row in table.Rows)
+                {
+                    string dateString = row["Date"] as string;
+                    DateTime date = Help.GetDate(dateString);
+                    
+                    bool used = Convert.ToBoolean(row["Used"]);
+
+                    if (!used && (date - DateTime.Now).Days <= daysBeforeCodeExpiration) //If the code is not used and it has not expired...
+                    {
+                        string codeString = row["Code"] as string;
+
+                        codes.Add(codeString);
+                    }
+
+                }
+            }
+
+            return codes;
+        }
+
+        /// <summary>
+        /// Adds a newly generated user code to the database.
+        /// </summary>
+        /// <param name="session">The session adding the user code.</param>
+        /// <param name="code">The resulting code that was generated.</param>
+        /// <returns>Returns true if the code was successfully added to the database. False otherwise.</returns>
+        public static bool AddUserCode(HttpSessionState session, out string code)
+        {
+            User sessionUser = Help.GetUserSession(session);
+            code = string.Empty;
+
+            if (sessionUser != null && sessionUser.PermissionLevel >= permissionToAddUserCodes) //If the user exists and their permissions are high enough.
+            {
+                code = Help.GenerateUserCode();
+
+                string sqlQuery = "INSERT INTO UserCodes (Code, Used, Date) VALUES " +
+                        "(@Code, @Used, @Date)";
+
+                SqlParameter codeParameter = new SqlParameter("@Code", SqlDbType.NVarChar, code.Length);
+                codeParameter.Value = code;
+                SqlParameter usedParameter = new SqlParameter("@Used", SqlDbType.Bit);
+                usedParameter.Value = 0;
+
+                string dateString = Help.GetDateString(DateTime.Now);
+                SqlParameter dateParameter = new SqlParameter("@Date", SqlDbType.NVarChar, dateString.Length);
+                dateParameter.Value = dateString;
+
+                SqlDataReader result = ExecuteSQL(GetConnectionStringUsersTable(), sqlQuery, "exception occured while adding a new user code.",
+                    codeParameter, usedParameter, dateParameter);
+
+                if (result != null) //If the result is not null, then the query succeeded and should be logged.
+                {
+                    Log(sessionUser, sessionUser.Username + " added a new user code with the value: " + code + ".");
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Deactivates a user code in the database so it cannot be used again.
+        /// </summary>
+        /// <param name="code">The code to deactivate.</param>
+        /// <param name="username">The username of the user who is deactivating this user code.</param>
+        /// <returns>Returns true if the code was deactived, false otherwise.</returns>
+        public static bool DeactivateUserCode(string username, string code, out UserCodeError error)
+        {
+            error = UserCodeError.None;
+            if (UserCodeExists(code, out error)) //We must make sure the user code exists or we cannot deactivate it.
+            {
+                if (error == UserCodeError.None) //If the code has not been used and has not expired...
+                {
+                    string sqlQuery = "UPDATE UserCodes SET " +
+                                "Used = @Used" +
+                                " WHERE Code = @Code";
+
+                    //Generating the parameters, this is done for sanitization reasons.
+                    SqlParameter codeParameter = new SqlParameter("@Code", SqlDbType.NVarChar, code.Length);
+                    codeParameter.Value = code;
+
+                    SqlParameter usedParameter = new SqlParameter("@Used", SqlDbType.Bit);
+                    usedParameter.Value = 1;
+
+                    SqlDataReader result = ExecuteSQL(GetConnectionStringUsersTable(), sqlQuery, "exception occured while deactivating a user code.",
+                        codeParameter, usedParameter);
+
+                    if (result != null)
+                    {
+                        Log(username, username + " has redeemed the user code " + code);
+
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Deactivates a user code in the database so it cannot be used again.
+        /// </summary>
+        /// <param name="code">The code to deactivate.</param>
+        /// <returns>Returns true if the code was deactived, false otherwise.</returns>
+        public static bool DeactivateUserCode(string code, out UserCodeError error)
+        {
+            error = UserCodeError.None;
+            if (UserCodeExists(code, out error)) //We must make sure the user code exists or we cannot deactivate it.
+            {
+                if (error == UserCodeError.None) //If the code has not been used and has not expired...
+                {
+                    string sqlQuery = "UPDATE UserCodes SET " +
+                                "Used = @Used" +
+                                " WHERE Code = @Code";
+
+                    //Generating the parameters, this is done for sanitization reasons.
+                    SqlParameter codeParameter = new SqlParameter("@Code", SqlDbType.NVarChar, code.Length);
+                    codeParameter.Value = code;
+
+                    SqlParameter usedParameter = new SqlParameter("@Used", SqlDbType.Bit);
+                    usedParameter.Value = 1;
+
+                    SqlDataReader result = ExecuteSQL(GetConnectionStringUsersTable(), sqlQuery, "exception occured while deactivating a user code.",
+                        codeParameter, usedParameter);
+
+                    if (result != null)
+                    {
+                        Log("", "A user code has been anonymousely deactivated. The code was " + code);
+
                         return true;
                     }
                 }

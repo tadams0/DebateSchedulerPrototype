@@ -219,3 +219,60 @@ Username: admin Message: "admin added a new debate with parameters { Hello versu
 Username: admin Message: "admin added a new debate with parameters { This versus Text, Team 1 Score: 0, Team 2 Score: 0, On Date: 11/19/2016 12:00:00 AM and takes place in the afternoon }." Logged at 11/3/2016 4:55:33 PM server time.
 Username: admin Message: "admin added a new debate with parameters { Mind versus Test2, Team 1 Score: 0, Team 2 Score: 0, On Date: 11/3/2016 12:00:00 AM and takes place in the morning }." Logged at 11/3/2016 4:55:33 PM server time.
 Username: admin Message: "admin added a new debate season with the id  { ID: 0 }." Logged at 11/3/2016 4:55:33 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: test1, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 11:11:38 AM server time.
+Username: admin Message: "admin added a new team with parameters { Name: test2, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 11:11:38 AM server time.
+Username: admin Message: "admin added a new team with parameters { Name: test3, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 11:11:38 AM server time.
+Username: admin Message: "admin added a new team with parameters { Name: test4, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 11:11:38 AM server time.
+Username: admin Message: "admin added a new team with parameters { Name: test5, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 11:11:38 AM server time.
+Username: admin Message: "admin added a new team with parameters { Name: test6, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 11:11:38 AM server time.
+Username: admin Message: "admin added a new team with parameters { Name: test7, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 11:11:38 AM server time.
+Username: admin Message: "admin added a new team with parameters { Name: test8, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 11:11:38 AM server time.
+Username: admin Message: "admin added a new team with parameters { Name: test9, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 11:11:38 AM server time.
+Username: admin Message: "admin added a new team with parameters { Name: test10, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 11:11:38 AM server time.
+Username: admin Message: "admin added a new team with parameters { Name: test1, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 11:21:32 AM server time.
+Username: admin Message: "admin added a new team with parameters { Name: test2, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 11:21:32 AM server time.
+Username: admin Message: "admin added a new user code with the value: 99j0O47F9E." Logged at 11/7/2016 12:17:57 PM server time.
+Username: admin Message: "admin added a new user code with the value: Q877lr6922." Logged at 11/7/2016 12:18:52 PM server time.
+Username: admin Message: "admin added a new user code with the value: 74bnFCeC5o." Logged at 11/7/2016 12:45:37 PM server time.
+Username: admin Message: "admin added a new user code with the value: 2biZh032VR." Logged at 11/7/2016 12:45:39 PM server time.
+Username: admin Message: "admin added a new user code with the value: X457Y677S1." Logged at 11/7/2016 12:45:40 PM server time.
+Username: admin Message: "admin added a new user code with the value: eq3j0QsK9b." Logged at 11/7/2016 12:45:40 PM server time.
+Username: admin Message: "admin added a new user code with the value: r2qT062036." Logged at 11/7/2016 12:45:41 PM server time.
+Username: admin Message: "admin added a new user code with the value: Fp2oXF97Xv." Logged at 11/7/2016 12:45:42 PM server time.
+Username: admin Message: "admin added a new user code with the value: 26A144O8yc." Logged at 11/7/2016 12:45:42 PM server time.
+Username: admin Message: "admin added a new user code with the value: cF1f29m37r." Logged at 11/7/2016 12:45:52 PM server time.
+Username: admin Message: "admin added a new user code with the value: k1NNU91R12." Logged at 11/7/2016 12:45:55 PM server time.
+Username: admin Message: "admin added a new user code with the value: K40Xs6Y9t2." Logged at 11/7/2016 12:46:00 PM server time.
+Username: admin Message: "admin added a new user code with the value: 2928gJo5G0." Logged at 11/7/2016 12:48:00 PM server time.
+Username: admin Message: "admin added a new user code with the value: 6X7Q24k0N7." Logged at 11/7/2016 12:48:01 PM server time.
+Username: admin Message: "admin added a new user code with the value: G779u900qh." Logged at 11/7/2016 12:50:03 PM server time.
+Username: admin Message: "admin added a new user code with the value: an4RV0547b." Logged at 11/7/2016 12:50:04 PM server time.
+Username: admin Message: "admin added a new user code with the value: 5J65Iok5A2." Logged at 11/7/2016 12:50:05 PM server time.
+Username: admin Message: "admin added a new user code with the value: S58rwNq895." Logged at 11/7/2016 12:50:05 PM server time.
+Username: admin Message: "admin added a new user code with the value: U5542c180T." Logged at 11/7/2016 12:50:07 PM server time.
+Username: admin Message: "admin added a new user code with the value: DMyM2444q2." Logged at 11/7/2016 12:50:09 PM server time.
+Username: admin Message: "admin added a new user code with the value: 12r1978V0l." Logged at 11/7/2016 12:50:10 PM server time.
+Username: admin Message: "admin added a new user code with the value: e4SDs5R220." Logged at 11/7/2016 12:50:11 PM server time.
+Username:  Message: "A user code has been anonymousely deactivated. The code was 74bnFCeC5o" Logged at 11/7/2016 12:57:31 PM server time.
+Username: ::1 Message: "::1 (IP) added a new user named test2." Logged at 11/7/2016 12:57:31 PM server time.
+Username: admin Message: "admin added a new user code with the value: 9oa07uM3Si." Logged at 11/7/2016 1:07:12 PM server time.
+Username:  Message: "A user code has been anonymousely deactivated. The code was 9oa07uM3Si" Logged at 11/7/2016 1:08:15 PM server time.
+Username: ::1 Message: "::1 (IP) added a new user named test4." Logged at 11/7/2016 1:08:15 PM server time.
+Username:  Message: "A user code has been anonymousely deactivated. The code was 6X7Q24k0N7" Logged at 11/7/2016 1:10:58 PM server time.
+Username:  Message: "A user code has been anonymousely deactivated. The code was U5542c180T" Logged at 11/7/2016 1:11:39 PM server time.
+Username: ::1 Message: "::1 (IP) added a new user named test44." Logged at 11/7/2016 1:11:39 PM server time.
+Username: ::1 Message: "::1 (IP) added a new user named test11." Logged at 11/7/2016 1:14:38 PM server time.
+Username: test11 Message: "test11 has redeemed the user code DMyM2444q2" Logged at 11/7/2016 1:14:38 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: test1, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 1:21:09 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: test13, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 1:21:09 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: iop2, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 1:21:09 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: iop3, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 1:21:09 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: iop4iop, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 1:21:09 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: iop5, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 1:21:09 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: iop6, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 1:21:09 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: ipo, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 1:21:09 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: 7iop, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 1:21:09 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: 8iop, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 1:21:09 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: test1, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 1:23:04 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: test2, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 1:23:04 PM server time.
+Username: ::1 Message: "::1 (IP) added a new user named test1." Logged at 11/7/2016 1:32:05 PM server time.

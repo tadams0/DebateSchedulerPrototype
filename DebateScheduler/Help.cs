@@ -376,6 +376,7 @@ namespace DebateScheduler
         /// <summary>
         /// creates every match for the season.
         /// </summary>
+        /// <param name="Saturdays">The list of Saturdays in a season.</param>
         /// <param name="teamList">The list of teams in a season.</param>
         /// <returns>Returns a list of debates for the season.</returns>
         public static List<TeamPair> MatchMake(List<DateTime> Saturdays, List<Team> teamList)
@@ -397,6 +398,19 @@ namespace DebateScheduler
                 int sat = 0;
                 Team teamA = tp.Team1;
                 Team teamB = tp.Team2;
+
+                if (teamA.ID > 10) //This function makes sure the lists used below will function properly
+                {
+                    teamA.ID %= 10;
+                    teamA.ID -= 1;
+                }
+
+                if (teamB.ID > 10) //This function makes sure the lists used below will function properly
+                {
+                    teamB.ID %= 10;
+                    teamB.ID -= 1;
+                }
+
 
                 if (prevTeams.ContainsKey(teamA.ID))
                     prevTeams[teamA.ID] += 1;
@@ -437,24 +451,6 @@ namespace DebateScheduler
                 tp.Date = Saturdays[sat];
             }
             return (teamPairs);
-        }
-
-        private static void CheckTeam(Dictionary<int, int> prevTeams, Team team, ref int currentSaturday)
-        {
-            int value = prevTeams[team.ID];
-            if (prevTeams.ContainsKey(team.ID))
-                value += 1;
-            else
-                value = 1;
-
-            if(value % 2 == 1)
-            {
-                if ( value != 1)
-                {
-                    currentSaturday++;
-                }
-
-            }
         }
 
         /// <summary>

@@ -424,3 +424,25 @@ Exception with message  "Login failed for user 'right'." was found. Additional I
 Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/5/2016 12:52:33 PM
 Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/5/2016 12:52:39 PM
 Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while authenticating username/password." logged at 11/5/2016 12:52:39 PM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while gathering a debate season." logged at 11/7/2016 11:25:46 AM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while gathering a debate season." logged at 11/7/2016 11:25:48 AM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while gathering a debate season." logged at 11/7/2016 11:25:58 AM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while authenticating username/password." logged at 11/7/2016 11:25:58 AM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while gathering a debate season." logged at 11/7/2016 11:26:02 AM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while authenticating username/password." logged at 11/7/2016 11:26:02 AM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while gathering a debate season." logged at 11/7/2016 11:26:05 AM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while authenticating username/password." logged at 11/7/2016 11:26:05 AM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while gathering a debate season." logged at 11/7/2016 11:32:57 AM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while gathering a debate season." logged at 11/7/2016 11:32:57 AM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while checking if a user exists." logged at 11/7/2016 11:33:27 AM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while adding a user." logged at 11/7/2016 11:33:27 AM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while checking if a user exists." logged at 11/7/2016 11:33:40 AM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while adding a user." logged at 11/7/2016 11:33:40 AM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while gathering a user's security question." logged at 11/7/2016 11:33:45 AM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while gathering a debate season." logged at 11/7/2016 5:16:59 PM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while gathering a debate season." logged at 11/7/2016 5:17:00 PM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while gathering a debate season." logged at 11/7/2016 5:17:15 PM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while authenticating username/password." logged at 11/7/2016 5:17:15 PM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while gathering a debate season." logged at 11/7/2016 5:18:42 PM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while gathering a debate season." logged at 11/7/2016 5:18:43 PM
+Exception with message  "Login failed for user 'right'." was found. Additional Info: "exception occured while gathering a group of news posts." logged at 11/7/2016 5:18:50 PM

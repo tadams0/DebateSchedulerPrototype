@@ -423,7 +423,7 @@ namespace DebateScheduler
         /// Sends an email containing the username and password of the given username.
         /// </summary>
         /// <param name="username">The username of the user whose email will be used to send their password.</param>
-        public static string EmailUserPassword(string username)
+        public static void EmailUserPassword(string username)
         {
             string password = string.Empty;
             string email = string.Empty;
@@ -435,23 +435,21 @@ namespace DebateScheduler
                 password = table.Rows[0]["Password"] as string;
             }
 
-            return password; //TODO: Make this method email the password instead of returning the password.
-            
-            //SmtpClient smtpClient = new SmtpClient();
-            //smtpClient.UseDefaultCredentials = true;
-            //smtpClient.DeliveryMethod = SmtpDeliveryMethod.PickupDirectoryFromIis;
-            //smtpClient.Host = "TeamWheresTheRightClick@gmail.com";
-            //smtpClient.Port = 2669;
-            //smtpClient.Credentials = new NetworkCredential("TeamWheresTheRightClick", "Right123456");
-            //smtpClient.EnableSsl = true;
+            //return password; //TODO: Make this method email the password instead of returning the password.
 
-            //MailMessage mail = new MailMessage();
-            //mail.From = new MailAddress("TeamWheresTheRightClick@gmail.com");
-            //mail.To.Add(email);
-            //mail.Subject = "Password Recovery";
-            //mail.Body = "A password recovery request was completed in Team Where's the Right Click's Debate Scheduler. The username and password to your account is \nUsername: " + username + " \nPassword: " + password;
+            SmtpClient smtpClient = new SmtpClient("smtp@gmail.com", 587);
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = new NetworkCredential("TeamWheresTheRightClick", "Right123456");
+            smtpClient.EnableSsl = true;
 
-            //smtpClient.Send(mail);
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("TeamWheresTheRightClick@gmail.com");
+            mail.To.Add(email);
+            mail.Subject = "Password Recovery";
+            mail.Body = "A password recovery request was completed in Team Where's the Right Click's Debate Scheduler. The username and password to your account is \nUsername: " + username + " \nPassword: " + password;
+            mail.IsBodyHtml = true;
+
+            smtpClient.Send(mail);
         }
 
         /// <summary>

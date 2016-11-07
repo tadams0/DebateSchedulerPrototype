@@ -44,8 +44,9 @@ namespace DebateScheduler
                 Panel_AnswerCorrect.Visible = true;
 
                 //Email password
-                string result = DatabaseHandler.EmailUserPassword(TextBox_Username.Text); //TODO: Have this method email the password, and do nothing else.
-                Label_EmailSent.Text = "Your password is: " + result; //Remove this once email works.
+                DatabaseHandler.EmailUserPassword(TextBox_Username.Text); //TODO: Have this method email the password, and do nothing else.
+                //string result = DatabaseHandler.EmailUserPassword(TextBox_Username.Text); //TODO: Have this method email the password, and do nothing else.
+                Label_EmailSent.Text = "Your password is: "; //Remove this once email works.
             }
             else
             {

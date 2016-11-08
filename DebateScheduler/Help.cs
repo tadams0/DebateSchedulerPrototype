@@ -417,6 +417,11 @@ namespace DebateScheduler
                 else
                     prevTeams[teamA.ID] = 1;
 
+                if (prevTeams.ContainsKey(teamB.ID))
+                    prevTeams[teamB.ID] += 1;
+                else
+                    prevTeams[teamB.ID] = 1;
+
                 int aVal = prevTeams[teamA.ID] % 2;
                 int bVal = prevTeams[teamB.ID] % 2;
                 if (aVal == 0)

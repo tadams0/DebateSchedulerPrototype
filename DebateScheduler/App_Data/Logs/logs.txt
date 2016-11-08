@@ -276,3 +276,39 @@ Username: admin Message: "admin added a new team with parameters { Name: 8iop, W
 Username: admin Message: "admin added a new team with parameters { Name: test1, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 1:23:04 PM server time.
 Username: admin Message: "admin added a new team with parameters { Name: test2, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 1:23:04 PM server time.
 Username: ::1 Message: "::1 (IP) added a new user named test1." Logged at 11/7/2016 1:32:05 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: 1one, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 7:54:38 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: 2two, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 7:54:38 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: 3three, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 7:54:38 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: 4four, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 7:54:38 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: 5five, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 7:54:38 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: 6six, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 7:54:38 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: se7en, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 7:54:38 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: 8eight, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 7:54:38 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: 9nine, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 7:54:38 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: 10ten, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 7:54:38 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: aaa, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: bbb, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: ccc, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: ddd, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: eee, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: fff, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: ggg, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: hhh, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: iii, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new team with parameters { Name: jjj, Wins: 0, Losses: 0, Ties: 0, Total Score: 0 }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new debate with parameters { iii versus jjj, Team 1 Score: 0, Team 2 Score: 0, On Date: 11/12/2016 12:00:00 AM and takes place in the morning }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new debate with parameters { fff versus jjj, Team 1 Score: 0, Team 2 Score: 0, On Date: 11/12/2016 12:00:00 AM and takes place in the afternoon }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new debate with parameters { aaa versus fff, Team 1 Score: 0, Team 2 Score: 0, On Date: 11/12/2016 12:00:00 AM and takes place in the afternoon }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new debate with parameters { eee versus fff, Team 1 Score: 0, Team 2 Score: 0, On Date: 11/19/2016 12:00:00 AM and takes place in the morning }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new debate with parameters { fff versus iii, Team 1 Score: 0, Team 2 Score: 0, On Date: 12/10/2016 12:00:00 AM and takes place in the afternoon }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new debate with parameters { aaa versus ddd, Team 1 Score: 0, Team 2 Score: 0, On Date: 11/26/2016 12:00:00 AM and takes place in the afternoon }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new debate with parameters { ddd versus eee, Team 1 Score: 0, Team 2 Score: 0, On Date: 12/10/2016 12:00:00 AM and takes place in the afternoon }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new debate with parameters { ddd versus jjj, Team 1 Score: 0, Team 2 Score: 0, On Date: 12/24/2016 12:00:00 AM and takes place in the afternoon }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new debate with parameters { aaa versus iii, Team 1 Score: 0, Team 2 Score: 0, On Date: 12/10/2016 12:00:00 AM and takes place in the afternoon }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new debate with parameters { eee versus iii, Team 1 Score: 0, Team 2 Score: 0, On Date: 12/17/2016 12:00:00 AM and takes place in the morning }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new debate with parameters { ddd versus iii, Team 1 Score: 0, Team 2 Score: 0, On Date: 12/31/2016 12:00:00 AM and takes place in the morning }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new debate with parameters { aaa versus eee, Team 1 Score: 0, Team 2 Score: 0, On Date: 12/24/2016 12:00:00 AM and takes place in the afternoon }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new debate with parameters { eee versus jjj, Team 1 Score: 0, Team 2 Score: 0, On Date: 1/7/2017 12:00:00 AM and takes place in the afternoon }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new debate with parameters { ddd versus fff, Team 1 Score: 0, Team 2 Score: 0, On Date: 1/7/2017 12:00:00 AM and takes place in the afternoon }." Logged at 11/7/2016 8:00:46 PM server time.
+Username: admin Message: "admin added a new debate with parameters { aaa versus jjj, Team 1 Score: 0, Team 2 Score: 0, On Date: 1/14/2017 12:00:00 AM and takes place in the morning }." Logged at 11/7/2016 8:00:47 PM server time.
+Username: admin Message: "admin added a new debate season with the id  { ID: 0 }." Logged at 11/7/2016 8:00:47 PM server time.

@@ -393,68 +393,76 @@ namespace DebateScheduler
 
             teamPairs = teamPairs.OrderBy(a => a.PairID).ToList();
             Dictionary<int, int> prevTeams = new Dictionary<int, int>();
-            foreach (TeamPair tp in teamPairs)
-            {
-                int sat = 0;
-                Team teamA = tp.Team1;
-                Team teamB = tp.Team2;
-
-                if (teamA.ID > 10) //This function makes sure the lists used below will function properly
+            int sat = 0;
+                foreach (TeamPair tp in teamPairs)
                 {
-                    teamA.ID %= 10;
-                    teamA.ID -= 1;
-                }
-
-                if (teamB.ID > 10) //This function makes sure the lists used below will function properly
-                {
-                    teamB.ID %= 10;
-                    teamB.ID -= 1;
-                }
+                    sat = 0;
+                    int teamA = tp.Team1.ID;
+                    int teamB = tp.Team2.ID;
 
 
-                if (prevTeams.ContainsKey(teamA.ID))
-                    prevTeams[teamA.ID] += 1;
-                else
-                    prevTeams[teamA.ID] = 1;
-
-                if (prevTeams.ContainsKey(teamB.ID))
-                    prevTeams[teamB.ID] += 1;
-                else
-                    prevTeams[teamB.ID] = 1;
-
-                int aVal = prevTeams[teamA.ID] % 2;
-                int bVal = prevTeams[teamB.ID] % 2;
-                if (aVal == 0)
-                    aVal = 2;
-                if (bVal == 0)
-                    bVal = 2;
-
-                if ((aVal + bVal) % 3 == 0)
-                {
-                    tp.MorningDebate = false;
-                }
-                else if((aVal + bVal) % 3 == 1)
-                {
-                    tp.MorningDebate = false;
-                }
-                else if ((aVal + bVal) % 3 == 2)
-                {
-                    tp.MorningDebate = true;
-                }
-
-                if (prevTeams[teamA.ID] >= 3 || prevTeams[teamB.ID] >= 3)
-                {
-                    if (!((aVal+bVal) == 0))
+                    if (teamA > 10) //This function makes sure the lists used below will function properly
                     {
-                        if (aVal < bVal)
-                            sat += prevTeams[teamB.ID];
-                        else
-                            sat += prevTeams[teamA.ID];
+                        teamA %= 10;
+                        if (teamA > 0)
+                            teamA -= 1;
                     }
-                }
 
-                tp.Date = Saturdays[sat];
-            }
+                    if (teamB > 10) //This function makes sure the lists used below will function properly
+                    {
+                        teamB %= 10;
+                        if (teamB > 0)
+                            teamB -= 1;
+                    }
+
+
+                    if (prevTeams.ContainsKey(teamA))
+                        prevTeams[teamA] += 1;
+                    else
+                        prevTeams[teamA] = 1;
+
+                    if (prevTeams.ContainsKey(teamB))
+                        prevTeams[teamB] += 1;
+                    else
+                        prevTeams[teamB] = 1;
+
+                    int aVal = prevTeams[teamA] % 2;
+                    int bVal = prevTeams[teamB] % 2;
+                    if (aVal == 0)
+                        aVal = 2;
+                    if (bVal == 0)
+                        bVal = 2;
+
+                    if ((aVal + bVal) % 3 == 0)
+                    {
+                        tp.MorningDebate = false;
+                    }
+                    else if ((aVal + bVal) % 3 == 1)
+                    {
+                        tp.MorningDebate = false;
+                    }
+                    else if ((aVal + bVal) % 3 == 2)
+                    {
+                        tp.MorningDebate = true;
+                    }
+
+                    if (prevTeams[teamA] >= 3 || prevTeams[teamB] >= 3)
+                    {
+                        if (!((aVal + bVal) == 0))
+                        {
+                            if (aVal < bVal)
+                                sat += prevTeams[teamB];
+                            else
+                                sat += prevTeams[teamA];
+                        }
+                    }
+
+                    if (sat >= 10)
+                    {
+                        sat %= 10;
+                    }
+                    tp.Date = Saturdays[sat];
+                }
             return (teamPairs);
         }
 

@@ -66,7 +66,7 @@ namespace DebateScheduler
         private MenuItem MakeRefereeButton()
         {
             MenuItem but = new MenuItem();
-            but.NavigateUrl = "~/RefereeView.aspx";
+            but.NavigateUrl = "~/Default.aspx";
             but.Text = "Referee";
             but.Value = "R";
             return but;
